@@ -1,0 +1,1210 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    searched_directories:
+      - "/usr/local/opt/go/bin/uname"
+      - "/usr/local/sbin/uname"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/uname"
+      - "/usr/local/bin/uname"
+    found: "/usr/bin/uname"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Darwin - 21.6.0 - x86_64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeUnixFindMake.cmake:5 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_MAKE_PROGRAM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gmake"
+      - "make"
+      - "smake"
+    candidate_directories:
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    searched_directories:
+      - "/usr/local/opt/go/bin/gmake"
+      - "/usr/local/sbin/gmake"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/gmake"
+      - "/usr/local/bin/gmake"
+      - "/usr/bin/gmake"
+      - "/bin/gmake"
+      - "/usr/sbin/gmake"
+      - "/sbin/gmake"
+      - "/usr/local/share/dotnet/gmake"
+      - "/Library/Apple/usr/bin/gmake"
+      - "/Users/johncurley/bin/gmake"
+      - "/Users/johncurley/.local/bin/gmake"
+      - "/Users/johncurley/go/bin/gmake"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/gmake"
+      - "/usr/local/opt/go/bin/make"
+      - "/usr/local/sbin/make"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/make"
+      - "/usr/local/bin/make"
+    found: "/usr/bin/make"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER"
+    description: "CXX compiler"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "c++"
+      - "g++"
+      - "cl"
+      - "bcc"
+      - "icpx"
+      - "icx"
+      - "clang++"
+    candidate_directories:
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    searched_directories:
+      - "/usr/local/opt/go/bin/c++"
+      - "/usr/local/sbin/c++"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/c++"
+      - "/usr/local/bin/c++"
+    found: "/usr/bin/c++"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "/usr/local/share/cmake/Modules/"
+    found: "/usr/local/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/c++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is AppleClang, found in:
+        /Users/johncurley/Projects/opensource/MetalExample/build/CMakeFiles/4.1.2/CompilerIdCXX/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:290 (message)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting CXX compiler apple sysroot: "/usr/bin/c++" "-E" "apple-sdk.cpp"
+        # 1 "apple-sdk.cpp"
+        # 1 "<built-in>" 1
+        # 1 "<built-in>" 3
+        # 384 "<built-in>" 3
+        # 1 "<command line>" 1
+        # 1 "<built-in>" 2
+        # 1 "apple-sdk.cpp" 2
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 1 3 4
+        # 242 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 1 3 4
+        # 165 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 166 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 1 3 4
+        # 167 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 243 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 2 "apple-sdk.cpp" 2
+        
+        
+      Found apple sysroot: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ar"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    found: "/usr/bin/ar"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    found: "/usr/bin/ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "strip"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    found: "/usr/bin/strip"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    found: "/usr/bin/ld"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "nm"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    found: "/usr/bin/nm"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objdump"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    found: "/usr/bin/objdump"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objcopy"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    searched_directories:
+      - "/usr/bin/objcopy"
+      - "/usr/local/opt/go/bin/objcopy"
+      - "/usr/local/sbin/objcopy"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/objcopy"
+      - "/usr/local/bin/objcopy"
+      - "/bin/objcopy"
+      - "/usr/sbin/objcopy"
+      - "/sbin/objcopy"
+      - "/usr/local/share/dotnet/objcopy"
+      - "/Library/Apple/usr/bin/objcopy"
+      - "/Users/johncurley/bin/objcopy"
+      - "/Users/johncurley/.local/bin/objcopy"
+      - "/Users/johncurley/go/bin/objcopy"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/objcopy"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "readelf"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    searched_directories:
+      - "/usr/bin/readelf"
+      - "/usr/local/opt/go/bin/readelf"
+      - "/usr/local/sbin/readelf"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/readelf"
+      - "/usr/local/bin/readelf"
+      - "/bin/readelf"
+      - "/usr/sbin/readelf"
+      - "/sbin/readelf"
+      - "/usr/local/share/dotnet/readelf"
+      - "/Library/Apple/usr/bin/readelf"
+      - "/Users/johncurley/bin/readelf"
+      - "/Users/johncurley/.local/bin/readelf"
+      - "/Users/johncurley/go/bin/readelf"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/readelf"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "dlltool"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    searched_directories:
+      - "/usr/bin/dlltool"
+      - "/usr/local/opt/go/bin/dlltool"
+      - "/usr/local/sbin/dlltool"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/dlltool"
+      - "/usr/local/bin/dlltool"
+      - "/bin/dlltool"
+      - "/usr/sbin/dlltool"
+      - "/sbin/dlltool"
+      - "/usr/local/share/dotnet/dlltool"
+      - "/Library/Apple/usr/bin/dlltool"
+      - "/Users/johncurley/bin/dlltool"
+      - "/Users/johncurley/.local/bin/dlltool"
+      - "/Users/johncurley/go/bin/dlltool"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/dlltool"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "addr2line"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    searched_directories:
+      - "/usr/bin/addr2line"
+      - "/usr/local/opt/go/bin/addr2line"
+      - "/usr/local/sbin/addr2line"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/addr2line"
+      - "/usr/local/bin/addr2line"
+      - "/bin/addr2line"
+      - "/usr/sbin/addr2line"
+      - "/sbin/addr2line"
+      - "/usr/local/share/dotnet/addr2line"
+      - "/Library/Apple/usr/bin/addr2line"
+      - "/Users/johncurley/bin/addr2line"
+      - "/Users/johncurley/.local/bin/addr2line"
+      - "/Users/johncurley/go/bin/addr2line"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/addr2line"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/opt/go/bin/"
+      - "/usr/local/sbin/"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/"
+      - "/usr/local/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/usr/local/share/dotnet/"
+      - "/Library/Apple/usr/bin/"
+      - "/Users/johncurley/bin/"
+      - "/Users/johncurley/.local/bin/"
+      - "/Users/johncurley/go/bin/"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/"
+    searched_directories:
+      - "/usr/bin/tapi"
+      - "/usr/local/opt/go/bin/tapi"
+      - "/usr/local/sbin/tapi"
+      - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/bin/tapi"
+      - "/usr/sbin/tapi"
+      - "/sbin/tapi"
+      - "/usr/local/share/dotnet/tapi"
+      - "/Library/Apple/usr/bin/tapi"
+      - "/Users/johncurley/bin/tapi"
+      - "/Users/johncurley/.local/bin/tapi"
+      - "/Users/johncurley/go/bin/tapi"
+      - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin/tapi"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompiler.cmake:54 (find_program)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineOBJCXXCompiler.cmake:63 (_cmake_find_compiler)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCXX_COMPILER"
+    description: "OBJCXX compiler"
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "clang++"
+      - "c++"
+      - "g++"
+    candidate_directories:
+      - "/usr/bin/"
+    found: "/usr/bin/clang++"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineOBJCXXCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeOBJCXXCompilerId.mm.in"
+    candidate_directories:
+      - "/usr/local/share/cmake/Modules/"
+    found: "/usr/local/share/cmake/Modules/CMakeOBJCXXCompilerId.mm.in"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/opt/go/bin"
+        - "/usr/local/sbin"
+        - "/Users/johncurley/.nvm/versions/node/v24.11.0/bin"
+        - "/usr/local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/bin"
+        - "/usr/local/bin"
+        - "/Users/johncurley/.local/bin"
+        - "/usr/local/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/usr/local/share/dotnet"
+        - "/Library/Apple/usr/bin"
+        - "/Users/johncurley/go/bin"
+        - "/Users/johncurley/VulkanSDK/1.4.328.1/macOS/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineOBJCXXCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the OBJCXX compiler identification source file "CMakeOBJCXXCompilerId.mm" succeeded.
+      Compiler: /usr/bin/clang++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the OBJCXX compiler identification source "CMakeOBJCXXCompilerId.mm" produced "a.out"
+      
+      The OBJCXX compiler identification is AppleClang, found in:
+        /Users/johncurley/Projects/opensource/MetalExample/build/CMakeFiles/4.1.2/CompilerIdOBJCXX/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/share/cmake/Modules/CMakeDetermineCompilerId.cmake:290 (message)"
+      - "/usr/local/share/cmake/Modules/CMakeDetermineOBJCXXCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting OBJCXX compiler apple sysroot: "/usr/bin/clang++" "-E" "apple-sdk.mm"
+        # 1 "apple-sdk.mm"
+        # 1 "<built-in>" 1
+        # 1 "<built-in>" 3
+        # 395 "<built-in>" 3
+        # 1 "<command line>" 1
+        # 1 "<built-in>" 2
+        # 1 "apple-sdk.mm" 2
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 1 3 4
+        # 242 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 1 3 4
+        # 165 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 166 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 1 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 1 3 4
+        # 167 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 243 "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 2 "apple-sdk.mm" 2
+        
+        
+      Found apple sysroot: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+...
