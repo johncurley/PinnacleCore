@@ -2,7 +2,7 @@
 
 #include <simd/simd.h>
 
-namespace Core
+namespace Pinnacle
 {
     class Camera
     {
@@ -17,6 +17,7 @@ namespace Core
         void setAspectRatio(float aspectRatio);
         void setNearPlane(float nearPlane);
         void setFarPlane(float farPlane);
+        void updateProjectionMatrix(float width, float height);
 
         simd_float4x4 getViewMatrix() const;
         simd_float4x4 getProjectionMatrix() const;
@@ -36,4 +37,4 @@ namespace Core
         float m_nearPlane;
         float m_farPlane;
     };
-} // namespace Core
+} // namespace Pinnacle

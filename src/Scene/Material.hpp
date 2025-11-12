@@ -5,7 +5,7 @@
 #include <vector>
 #include <memory>
 
-namespace Scene
+namespace Pinnacle
 {
     class Texture;
 
@@ -15,11 +15,11 @@ namespace Scene
         float metallicFactor = 1.0f;
         float roughnessFactor = 1.0f;
 
-        std::shared_ptr<Texture> baseColorTexture;
-        std::shared_ptr<Texture> metallicRoughnessTexture;
-        std::shared_ptr<Texture> normalTexture;
-        std::shared_ptr<Texture> occlusionTexture;
-        std::shared_ptr<Texture> emissiveTexture;
+        std::shared_ptr<Pinnacle::Texture> baseColorTexture;
+        std::shared_ptr<Pinnacle::Texture> metallicRoughnessTexture;
+        std::shared_ptr<Pinnacle::Texture> normalTexture;
+        std::shared_ptr<Pinnacle::Texture> occlusionTexture;
+        std::shared_ptr<Pinnacle::Texture> emissiveTexture;
     };
 
     class Material
@@ -34,4 +34,4 @@ namespace Scene
     private:
         PBRMaterial m_pbrMaterial;
     };
-} // namespace Scene
+} // namespace Pinnacle

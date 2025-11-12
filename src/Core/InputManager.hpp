@@ -3,7 +3,7 @@
 #include <simd/simd.h>
 #include "Camera.hpp"
 
-namespace Core
+namespace Pinnacle
 {
     class InputManager
     {
@@ -11,9 +11,9 @@ namespace Core
         InputManager();
         ~InputManager();
 
-        void mouseDown(simd_float2 point, Core::Camera& camera);
-        void mouseDragged(simd_float2 point, Core::Camera& camera);
-        void mouseUp(simd_float2 point, Core::Camera& camera);
+        void mouseDown(simd_float2 point, Pinnacle::Camera& camera);
+        void mouseDragged(simd_float2 point, Pinnacle::Camera& camera);
+        void mouseUp(simd_float2 point, Pinnacle::Camera& camera);
 
         // TODO: Add methods for camera control based on mouse input
 
@@ -21,4 +21,4 @@ namespace Core
         bool m_isMouseDown;
         simd_float2 m_lastMousePosition;
     };
-} // namespace Core
+} // namespace Pinnacle

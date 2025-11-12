@@ -1,0 +1,859 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		5923CBEFF8174B169BF60EDC /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 69167075DC0344FE84DF8A08 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				E426E293BD4D81381EB23407 /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				4210B3D36CD241A98A233E9C /* PBXTargetDependency */,
+				002A6C2A988A40F9BCD2DE2B /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		9B96759306DF42837AAD3116 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A1EF46D01B994C6D9694D694 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				DF2F007861F74A1DF4A43A18 /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0ECD61265F4B4EC5940E8A16 /* InputManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1DC6EFB9336B4A0F8A5DF197 /* InputManager.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		151DAC288F9648A4976BE24F /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E75CBE0F897D4E1E86404E89 /* Renderer.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		2FA1E45D2B9848D4B08E527B /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 880D4C99F22D4A40B286CBF2 /* Texture.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4E97C27F3FFB44E78FB2D4E3 /* Model.mm in Sources */ = {isa = PBXBuildFile; fileRef = 945432814976445A8E8669EE /* Model.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		4FC625FAD35249BC835737C7 /* MetalCppImpl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 19747013D5B845B4A1E0B6C5 /* MetalCppImpl.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		5BC26A83460746B68D7D73BF /* Scene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 322E6E05DD0E497D9C9433AD /* Scene.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6EF24B32E79F438FB2F78465 /* Mesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8C3728DFB81B4E83B1B1F0B2 /* Mesh.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		735E5428E00D4CB7B3E4C855 /* Node.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FCDD3A5F5594E96B7EC88A9 /* Node.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		9E13E5D2C7DF4F3ABDAC678F /* libs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 343A1DF4726B49239742F78B /* libs.cpp */; };
+		A6E2C75CFCE94A52BD21C78A /* MetalViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9406A8ABA4804A959436BCC5 /* MetalViewContainer.swift */; };
+		E28DEC72D74E4E339FC608DF /* MetalExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C261807DFD04380977FE20E /* MetalExampleApp.swift */; };
+		E8B3D2A1AD12450BB56A96EA /* Material.mm in Sources */ = {isa = PBXBuildFile; fileRef = 19A17F94B5A940F5BB9C36AB /* Material.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F11C97E646904507953582CA /* Camera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B866BE770B64C1B8D2B9C8E /* Camera.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		FB2014A6812743E682C77B26 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940210BE55E94D9997B3DF88 /* ContentView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2EB0BA2D0566413D870DDA98 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 814B8F2082B24241A8301ECC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B96759306DF42837AAD3116;
+			remoteInfo = ZERO_CHECK;
+		};
+		40F560EC52C34811AEB8BDD0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 814B8F2082B24241A8301ECC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B96759306DF42837AAD3116;
+			remoteInfo = ZERO_CHECK;
+		};
+		E27E66C3FB10476C9638B2D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 814B8F2082B24241A8301ECC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 309AB56D01822C969FBA2ABA;
+			remoteInfo = PinnacleCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		19747013D5B845B4A1E0B6C5 /* MetalCppImpl.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = MetalCppImpl.mm; path = MetalExample/MetalCppImpl.mm; sourceTree = SOURCE_ROOT; };
+		19A17F94B5A940F5BB9C36AB /* Material.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Material.mm; path = src/Scene/Material.mm; sourceTree = SOURCE_ROOT; };
+		1DC6EFB9336B4A0F8A5DF197 /* InputManager.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = InputManager.mm; path = src/Core/InputManager.mm; sourceTree = SOURCE_ROOT; };
+		2C261807DFD04380977FE20E /* MetalExampleApp.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = MetalExampleApp.swift; path = MetalExample/SwiftUI/MetalExampleApp.swift; sourceTree = SOURCE_ROOT; };
+		322E6E05DD0E497D9C9433AD /* Scene.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Scene.mm; path = src/Core/Scene.mm; sourceTree = SOURCE_ROOT; };
+		343A1DF4726B49239742F78B /* libs.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = libs.cpp; sourceTree = SOURCE_ROOT; };
+		41FA19002EBEFA2E00B8030D /* MetalExample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalExample; sourceTree = "<group>"; };
+		57B01ACC71174E87B5F5A950 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		5C13ED2F6B424227B2DF6532 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		880D4C99F22D4A40B286CBF2 /* Texture.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Texture.mm; path = src/Scene/Texture.mm; sourceTree = SOURCE_ROOT; };
+		8B866BE770B64C1B8D2B9C8E /* Camera.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Camera.mm; path = src/Core/Camera.mm; sourceTree = SOURCE_ROOT; };
+		8C3728DFB81B4E83B1B1F0B2 /* Mesh.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Mesh.mm; path = src/Scene/Mesh.mm; sourceTree = SOURCE_ROOT; };
+		8FCDD3A5F5594E96B7EC88A9 /* Node.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Node.mm; path = src/Scene/Node.mm; sourceTree = SOURCE_ROOT; };
+		940210BE55E94D9997B3DF88 /* ContentView.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = ContentView.swift; path = MetalExample/SwiftUI/ContentView.swift; sourceTree = SOURCE_ROOT; };
+		9406A8ABA4804A959436BCC5 /* MetalViewContainer.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; fileEncoding = 4; name = MetalViewContainer.swift; path = MetalExample/SwiftUI/MetalViewContainer.swift; sourceTree = SOURCE_ROOT; };
+		945432814976445A8E8669EE /* Model.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Model.mm; path = src/Scene/Model.mm; sourceTree = SOURCE_ROOT; };
+		BACA37C3F9EF41ABAC97AF36 /* triangle.metal */ = {isa = PBXFileReference; explicitFileType = sourcecode.metal; fileEncoding = 4; name = triangle.metal; path = MetalExample/triangle.metal; sourceTree = SOURCE_ROOT; };
+		D7CF32D05044472AA85E7359 /* PinnacleCore */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; name = PinnacleCore; path = PinnacleCore.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA3F5690E9A84BC9A621885F /* Info.plist */ = {isa = PBXFileReference; explicitFileType = sourcecode.text.plist; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = build/CMakeFiles/PinnacleCore.dir/Info.plist; sourceTree = SOURCE_ROOT; };
+		E75CBE0F897D4E1E86404E89 /* Renderer.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Renderer.mm; path = src/Renderer/Renderer.mm; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DE508501D4374BE799C4AE0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1DDAFA39420343FFA1164C73 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		21CB7DFC61924958A1020A86 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		45D5DCF028844107B3048075 /* PinnacleCore */ = {
+			isa = PBXGroup;
+			children = (
+				ADFA2289997241A9AA5C491F /* Source Files */,
+				5461488B3B9C4A52ABC36D65 /* Resources */,
+				57B01ACC71174E87B5F5A950 /* CMakeLists.txt */,
+				940210BE55E94D9997B3DF88 /* ContentView.swift */,
+				41FA19002EBEFA2E00B8030D /* MetalExample */,
+				2C261807DFD04380977FE20E /* MetalExampleApp.swift */,
+				9406A8ABA4804A959436BCC5 /* MetalViewContainer.swift */,
+				BACA37C3F9EF41ABAC97AF36 /* triangle.metal */,
+			);
+			name = PinnacleCore;
+			sourceTree = "<group>";
+		};
+		4966A140068248EE859EC865 = {
+			isa = PBXGroup;
+			children = (
+				45D5DCF028844107B3048075 /* PinnacleCore */,
+				BD7D55D36BC749BAB22BC995 /* ALL_BUILD */,
+				746EC87C2DC244DD8C9F5FFC /* Products */,
+				E17FF9D02A9D4E27B54EF941 /* Frameworks */,
+				21CB7DFC61924958A1020A86 /* Resources */,
+			);
+			sourceTree = "<group>";
+		};
+		5461488B3B9C4A52ABC36D65 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DA3F5690E9A84BC9A621885F /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		746EC87C2DC244DD8C9F5FFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D7CF32D05044472AA85E7359 /* PinnacleCore */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADFA2289997241A9AA5C491F /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				19747013D5B845B4A1E0B6C5 /* MetalCppImpl.mm */,
+				343A1DF4726B49239742F78B /* libs.cpp */,
+				8B866BE770B64C1B8D2B9C8E /* Camera.mm */,
+				1DC6EFB9336B4A0F8A5DF197 /* InputManager.mm */,
+				322E6E05DD0E497D9C9433AD /* Scene.mm */,
+				E75CBE0F897D4E1E86404E89 /* Renderer.mm */,
+				19A17F94B5A940F5BB9C36AB /* Material.mm */,
+				8C3728DFB81B4E83B1B1F0B2 /* Mesh.mm */,
+				945432814976445A8E8669EE /* Model.mm */,
+				8FCDD3A5F5594E96B7EC88A9 /* Node.mm */,
+				880D4C99F22D4A40B286CBF2 /* Texture.mm */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		BD7D55D36BC749BAB22BC995 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				1DDAFA39420343FFA1164C73 /* CMake Rules */,
+				5C13ED2F6B424227B2DF6532 /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		E17FF9D02A9D4E27B54EF941 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		309AB56D01822C969FBA2ABA /* PinnacleCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 173FBD7F4ED745CE8E4763B1 /* Build configuration list for PBXNativeTarget "PinnacleCore" */;
+			buildPhases = (
+				E14E175DB4014AFA94B0AA93 /* Sources */,
+				DE508501D4374BE799C4AE0B /* Frameworks */,
+				B87EACDF49CB9E736520E8DF /* CMake PostBuild Rules */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4FE210EE23044B9EBE265494 /* PBXTargetDependency */,
+			);
+			name = PinnacleCore;
+			productName = PinnacleCore;
+			productReference = D7CF32D05044472AA85E7359 /* PinnacleCore */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		814B8F2082B24241A8301ECC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1420;
+			};
+			buildConfigurationList = 20B6C176DDBF4CE4B35E3AAB /* Build configuration list for PBXProject "PinnacleCore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4966A140068248EE859EC865;
+			projectDirPath = /Users/johncurley/Projects/opensource/MetalExample;
+			projectRoot = "";
+			targets = (
+				5923CBEFF8174B169BF60EDC /* ALL_BUILD */,
+				309AB56D01822C969FBA2ABA /* PinnacleCore */,
+				9B96759306DF42837AAD3116 /* ZERO_CHECK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B87EACDF49CB9E736520E8DF /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+				"$(TARGET_BUILD_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nif test \"$CONFIGURATION\" = \"Debug\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  /usr/local/bin/cmake -E copy /Users/johncurley/Projects/opensource/MetalExample/MetalExample/triangle.metal /Users/johncurley/Projects/opensource/MetalExample/build/bin/Debug/PinnacleCore.app/Contents/Resources/triangle.metal\nfi\nif test \"$CONFIGURATION\" = \"Release\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  /usr/local/bin/cmake -E copy /Users/johncurley/Projects/opensource/MetalExample/MetalExample/triangle.metal /Users/johncurley/Projects/opensource/MetalExample/build/bin/Release/PinnacleCore.app/Contents/Resources/triangle.metal\nfi\nif test \"$CONFIGURATION\" = \"MinSizeRel\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  /usr/local/bin/cmake -E copy /Users/johncurley/Projects/opensource/MetalExample/MetalExample/triangle.metal /Users/johncurley/Projects/opensource/MetalExample/build/bin/MinSizeRel/PinnacleCore.app/Contents/Resources/triangle.metal\nfi\nif test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  /usr/local/bin/cmake -E copy /Users/johncurley/Projects/opensource/MetalExample/MetalExample/triangle.metal /Users/johncurley/Projects/opensource/MetalExample/build/bin/RelWithDebInfo/PinnacleCore.app/Contents/Resources/triangle.metal\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DF2F007861F74A1DF4A43A18 /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+				/Users/johncurley/Projects/opensource/MetalExample/build/CMakeFiles/ZERO_CHECK,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nif test \"$CONFIGURATION\" = \"Debug\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  make -f /Users/johncurley/Projects/opensource/MetalExample/build/CMakeScripts/ReRunCMake.make\nfi\nif test \"$CONFIGURATION\" = \"Release\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  make -f /Users/johncurley/Projects/opensource/MetalExample/build/CMakeScripts/ReRunCMake.make\nfi\nif test \"$CONFIGURATION\" = \"MinSizeRel\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  make -f /Users/johncurley/Projects/opensource/MetalExample/build/CMakeScripts/ReRunCMake.make\nfi\nif test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  make -f /Users/johncurley/Projects/opensource/MetalExample/build/CMakeScripts/ReRunCMake.make\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E426E293BD4D81381EB23407 /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+				/Users/johncurley/Projects/opensource/MetalExample/build/CMakeFiles/ALL_BUILD,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nif test \"$CONFIGURATION\" = \"Debug\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  echo Build\\ all\\ projects\nfi\nif test \"$CONFIGURATION\" = \"Release\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  echo Build\\ all\\ projects\nfi\nif test \"$CONFIGURATION\" = \"MinSizeRel\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  echo Build\\ all\\ projects\nfi\nif test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :\n  cd /Users/johncurley/Projects/opensource/MetalExample/build\n  echo Build\\ all\\ projects\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E14E175DB4014AFA94B0AA93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FC625FAD35249BC835737C7 /* MetalCppImpl.mm in Sources */,
+				FB2014A6812743E682C77B26 /* ContentView.swift in Sources */,
+				E28DEC72D74E4E339FC608DF /* MetalExampleApp.swift in Sources */,
+				A6E2C75CFCE94A52BD21C78A /* MetalViewContainer.swift in Sources */,
+				9E13E5D2C7DF4F3ABDAC678F /* libs.cpp in Sources */,
+				F11C97E646904507953582CA /* Camera.mm in Sources */,
+				0ECD61265F4B4EC5940E8A16 /* InputManager.mm in Sources */,
+				5BC26A83460746B68D7D73BF /* Scene.mm in Sources */,
+				151DAC288F9648A4976BE24F /* Renderer.mm in Sources */,
+				E8B3D2A1AD12450BB56A96EA /* Material.mm in Sources */,
+				6EF24B32E79F438FB2F78465 /* Mesh.mm in Sources */,
+				4E97C27F3FFB44E78FB2D4E3 /* Model.mm in Sources */,
+				735E5428E00D4CB7B3E4C855 /* Node.mm in Sources */,
+				2FA1E45D2B9848D4B08E527B /* Texture.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		002A6C2A988A40F9BCD2DE2B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B96759306DF42837AAD3116 /* ZERO_CHECK */;
+			targetProxy = 2EB0BA2D0566413D870DDA98 /* PBXContainerItemProxy */;
+		};
+		4210B3D36CD241A98A233E9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 309AB56D01822C969FBA2ABA /* PinnacleCore */;
+			targetProxy = E27E66C3FB10476C9638B2D5 /* PBXContainerItemProxy */;
+		};
+		4FE210EE23044B9EBE265494 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B96759306DF42837AAD3116 /* ZERO_CHECK */;
+			targetProxy = 40F560EC52C34811AEB8BDD0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		03BE847BA11C49CEA2F2C600 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				SYMROOT = /Users/johncurley/Projects/opensource/MetalExample/build/build;
+			};
+			name = MinSizeRel;
+		};
+		09C4C6D8078B444C921E3591 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		0B829319EB024612AB44F311 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/johncurley/Projects/opensource/MetalExample/build/bin/Debug;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/johncurley/Projects/opensource/MetalExample/MetalExample,
+					/Users/johncurley/Projects/opensource/MetalExample,
+					"/Users/johncurley/Projects/opensource/MetalExample/metal-cpp",
+					/Users/johncurley/Projects/opensource/MetalExample/libs,
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = /Users/johncurley/Projects/opensource/MetalExample/build/CMakeFiles/PinnacleCore.dir/Info.plist;
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++17' ";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					Metal,
+					"-framework",
+					MetalKit,
+					"-framework",
+					SwiftUI,
+					"-lobjc",
+					"-lc++",
+					"-lc++",
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = "-Onone     $(inherited)";
+				PRODUCT_NAME = PinnacleCore;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_INCLUDE_PATHS = "/Users/johncurley/Projects/opensource/MetalExample/MetalExample /Users/johncurley/Projects/opensource/MetalExample /Users/johncurley/Projects/opensource/MetalExample/metal-cpp /Users/johncurley/Projects/opensource/MetalExample/libs $(inherited)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/johncurley/Projects/opensource/MetalExample/MetalExample/SwiftUI/PinnacleBridge.h;
+				TARGET_TEMP_DIR = "/Users/johncurley/Projects/opensource/MetalExample/build/build/PinnacleCore.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		0D56A1FA5F44431BB2E2C67A /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				SYMROOT = /Users/johncurley/Projects/opensource/MetalExample/build/build;
+			};
+			name = RelWithDebInfo;
+		};
+		2DAAB932CE23445F87A89BB4 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/johncurley/Projects/opensource/MetalExample/build/bin/RelWithDebInfo;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/johncurley/Projects/opensource/MetalExample/MetalExample,
+					/Users/johncurley/Projects/opensource/MetalExample,
+					"/Users/johncurley/Projects/opensource/MetalExample/metal-cpp",
+					/Users/johncurley/Projects/opensource/MetalExample/libs,
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = /Users/johncurley/Projects/opensource/MetalExample/build/CMakeFiles/PinnacleCore.dir/Info.plist;
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"'-std=gnu++17'",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					Metal,
+					"-framework",
+					MetalKit,
+					"-framework",
+					SwiftUI,
+					"-lobjc",
+					"-lc++",
+					"-lc++",
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = "       $(inherited)";
+				PRODUCT_NAME = PinnacleCore;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_INCLUDE_PATHS = "/Users/johncurley/Projects/opensource/MetalExample/MetalExample /Users/johncurley/Projects/opensource/MetalExample /Users/johncurley/Projects/opensource/MetalExample/metal-cpp /Users/johncurley/Projects/opensource/MetalExample/libs $(inherited)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/johncurley/Projects/opensource/MetalExample/MetalExample/SwiftUI/PinnacleBridge.h;
+				TARGET_TEMP_DIR = "/Users/johncurley/Projects/opensource/MetalExample/build/build/PinnacleCore.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		3C45429EF1454093A9C55896 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = /Users/johncurley/Projects/opensource/MetalExample/build/build;
+			};
+			name = Debug;
+		};
+		4555CB7DC8D7430CBF14FF42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		60ABDC9C097D44B086A58BB9 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		62F1B70E39CF43459B43F74D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/johncurley/Projects/opensource/MetalExample/build/bin/Release;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/johncurley/Projects/opensource/MetalExample/MetalExample,
+					/Users/johncurley/Projects/opensource/MetalExample,
+					"/Users/johncurley/Projects/opensource/MetalExample/metal-cpp",
+					/Users/johncurley/Projects/opensource/MetalExample/libs,
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = /Users/johncurley/Projects/opensource/MetalExample/build/CMakeFiles/PinnacleCore.dir/Info.plist;
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"'-std=gnu++17'",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					Metal,
+					"-framework",
+					MetalKit,
+					"-framework",
+					SwiftUI,
+					"-lobjc",
+					"-lc++",
+					"-lc++",
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = "    $(inherited)";
+				PRODUCT_NAME = PinnacleCore;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_INCLUDE_PATHS = "/Users/johncurley/Projects/opensource/MetalExample/MetalExample /Users/johncurley/Projects/opensource/MetalExample /Users/johncurley/Projects/opensource/MetalExample/metal-cpp /Users/johncurley/Projects/opensource/MetalExample/libs $(inherited)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/johncurley/Projects/opensource/MetalExample/MetalExample/SwiftUI/PinnacleBridge.h;
+				TARGET_TEMP_DIR = "/Users/johncurley/Projects/opensource/MetalExample/build/build/PinnacleCore.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		656087A6F3D14E00838453E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				SYMROOT = /Users/johncurley/Projects/opensource/MetalExample/build/build;
+			};
+			name = Release;
+		};
+		68E206500B48439FBA37CDC7 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		B352FA752FE74F7385E9FC2E /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		B9260A051DB14DCE867433CA /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		EA8A4D4E719345D69DCD79B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		F0A77D1FC80B428DBE6D3238 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = /Users/johncurley/Projects/opensource/MetalExample/build/bin/MinSizeRel;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					/Users/johncurley/Projects/opensource/MetalExample/MetalExample,
+					/Users/johncurley/Projects/opensource/MetalExample,
+					"/Users/johncurley/Projects/opensource/MetalExample/metal-cpp",
+					/Users/johncurley/Projects/opensource/MetalExample/libs,
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = /Users/johncurley/Projects/opensource/MetalExample/build/CMakeFiles/PinnacleCore.dir/Info.plist;
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"'-std=gnu++17'",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					Metal,
+					"-framework",
+					MetalKit,
+					"-framework",
+					SwiftUI,
+					"-lobjc",
+					"-lc++",
+					"-lc++",
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				OTHER_SWIFT_FLAGS = "-Osize  $(inherited)";
+				PRODUCT_NAME = PinnacleCore;
+				SECTORDER_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_INCLUDE_PATHS = "/Users/johncurley/Projects/opensource/MetalExample/MetalExample /Users/johncurley/Projects/opensource/MetalExample /Users/johncurley/Projects/opensource/MetalExample/metal-cpp /Users/johncurley/Projects/opensource/MetalExample/libs $(inherited)";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/johncurley/Projects/opensource/MetalExample/MetalExample/SwiftUI/PinnacleBridge.h;
+				TARGET_TEMP_DIR = "/Users/johncurley/Projects/opensource/MetalExample/build/build/PinnacleCore.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		FF3387C4234C43EB856A8C2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		173FBD7F4ED745CE8E4763B1 /* Build configuration list for PBXNativeTarget "PinnacleCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B829319EB024612AB44F311 /* Debug */,
+				62F1B70E39CF43459B43F74D /* Release */,
+				F0A77D1FC80B428DBE6D3238 /* MinSizeRel */,
+				2DAAB932CE23445F87A89BB4 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		20B6C176DDBF4CE4B35E3AAB /* Build configuration list for PBXProject "PinnacleCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C45429EF1454093A9C55896 /* Debug */,
+				656087A6F3D14E00838453E5 /* Release */,
+				03BE847BA11C49CEA2F2C600 /* MinSizeRel */,
+				0D56A1FA5F44431BB2E2C67A /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		69167075DC0344FE84DF8A08 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4555CB7DC8D7430CBF14FF42 /* Debug */,
+				09C4C6D8078B444C921E3591 /* Release */,
+				B9260A051DB14DCE867433CA /* MinSizeRel */,
+				68E206500B48439FBA37CDC7 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A1EF46D01B994C6D9694D694 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF3387C4234C43EB856A8C2D /* Debug */,
+				EA8A4D4E719345D69DCD79B3 /* Release */,
+				B352FA752FE74F7385E9FC2E /* MinSizeRel */,
+				60ABDC9C097D44B086A58BB9 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 814B8F2082B24241A8301ECC /* Project object */;
+}

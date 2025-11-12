@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.26)
 project(PinnacleCore LANGUAGES CXX OBJCXX Swift)
+set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0")
 
 # -----------------------------------------------------------------------------
 # Build and language setup
@@ -8,22 +9,43 @@ set(CMAKE_XCODE_ATTRIBUTE_SWIFT_VERSION "5.0")
 set(CMAKE_XCODE_ATTRIBUTE_CLANG_ENABLE_OBJC_ARC "YES")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_OBJCXX_STANDARD 17)
-set(CMAKE_SWIFT_STANDARD 5)
 
 # -----------------------------------------------------------------------------
 # Source files
 # -----------------------------------------------------------------------------
+
+
 set(SWIFT_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/MetalExample/SwiftUI/MetalExampleApp.swift
-    ${CMAKE_CURRENT_SOURCE_DIR}/MetalExample/SwiftUI/ContentView.swift
-    ${CMAKE_CURRENT_SOURCE_DIR}/MetalExample/SwiftUI/MetalViewContainer.swift
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/MetalExampleApp.swift
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ContentView.swift
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/MetalView.swift
 )
 
 set(OBJCXX_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/MetalExample/MetalCppImpl.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Core/Camera.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Core/InputManager.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Core/Scene.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Renderer/Renderer.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Material.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Mesh.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Model.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Node.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Texture.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/PinnacleBridge.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/PinnacleMetalImplementation.mm
 )
 
 
+
+set(CXX_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/libs.cpp
+)
+
+set(METAL_SHADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Shaders/triangle.metal
+)
+
+set_source_files_properties(${METAL_SHADERS} PROPERTIES LANGUAGE METAL)
 
 # -----------------------------------------------------------------------------
 # App target
@@ -31,6 +53,8 @@ set(OBJCXX_FILES
 add_executable(PinnacleCore MACOSX_BUNDLE
     ${SWIFT_FILES}
     ${OBJCXX_FILES}
+    ${CXX_FILES}
+    ${METAL_SHADERS}
 )
 
 # -----------------------------------------------------------------------------
@@ -40,6 +64,7 @@ target_link_libraries(PinnacleCore
     "-framework Cocoa"
     "-framework Metal"
     "-framework MetalKit"
+    "-framework Foundation"
     "-framework SwiftUI"
 )
 
@@ -48,12 +73,12 @@ target_link_libraries(PinnacleCore
 # -----------------------------------------------------------------------------
 set_source_files_properties(${OBJCXX_FILES} PROPERTIES COMPILE_FLAGS "-fobjc-arc")
 
+# Disable ARC for PinnacleMetalImplementation.mm due to manual memory management
+set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/src/PinnacleMetalImplementation.mm PROPERTIES COMPILE_FLAGS "-fno-objc-arc")
+
 # -----------------------------------------------------------------------------
 # Include directories
 # -----------------------------------------------------------------------------
-target_include_directories(PinnacleCore PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/MetalExample
-)
 
 # -----------------------------------------------------------------------------
 # Fetch or locate metal-cpp (bkaradzic fork)
@@ -81,7 +106,12 @@ endif()
 
 if(METAL_CPP_PATH)
     message(STATUS "Using metal-cpp from: ${METAL_CPP_PATH}")
-    target_include_directories(PinnacleCore PRIVATE ${METAL_CPP_PATH})
+    target_include_directories(PinnacleCore PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/MetalExample
+        ${CMAKE_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/metal-cpp
+        ${CMAKE_SOURCE_DIR}/libs
+    )
 else()
     message(WARNING "⚠️  Failed to locate or fetch metal-cpp.")
 endif()
@@ -90,7 +120,8 @@ endif()
 # Swift bridging header
 # -----------------------------------------------------------------------------
 set_target_properties(PinnacleCore PROPERTIES
-    XCODE_ATTRIBUTE_SWIFT_OBJC_BRIDGING_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/MetalExample/SwiftUI/PinnacleBridge.h"
+    XCODE_ATTRIBUTE_SWIFT_OBJC_BRIDGING_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/PinnacleBridge.h"
+    RESOURCE "${CMAKE_CURRENT_SOURCE_DIR}/src/Shaders"
 )
 
 # -----------------------------------------------------------------------------

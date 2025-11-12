@@ -2,6 +2,8 @@
 
 #include <string>
 #include <vector>
+#include <memory>
+#include <Foundation/NSSharedPtr.hpp>
 
 // Forward declarations for Metal types
 namespace MTL
@@ -10,7 +12,12 @@ namespace MTL
     class Texture;
 }
 
-namespace Scene
+namespace NS
+{
+    using UInteger = unsigned long;
+}
+
+namespace Pinnacle
 {
     class Texture
     {
@@ -19,9 +26,9 @@ namespace Scene
         Texture(MTL::Device* pDevice, const unsigned char* pData, int width, int height, int channels);
         ~Texture();
 
-        MTL::Texture* getMTLTexture() const { return m_pTexture; }
+        MTL::Texture* getMTLTexture() const { return m_pTexture.get(); }
 
     private:
-        MTL::Texture* m_pTexture;
+        NS::SharedPtr<MTL::Texture> m_pTexture;
     };
-} // namespace Scene
+} // namespace Pinnacle

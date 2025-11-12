@@ -6,7 +6,7 @@
 #include <vector>
 #include <memory>
 
-namespace Core
+namespace Pinnacle
 {
     class Scene
     {
@@ -14,10 +14,11 @@ namespace Core
         Scene();
         ~Scene();
 
-        void addModel(std::shared_ptr<::Scene::Model> model);
-        const std::vector<std::shared_ptr<::Scene::Model>>& getModels() const;
+        void addModel(std::shared_ptr<Pinnacle::Model> model);
+        const std::vector<std::shared_ptr<Pinnacle::Model>>& getModels() const;
 
-        Core::Camera& getCamera();
+        Pinnacle::Camera& getCamera();
+        void setCamera(Pinnacle::Camera* pCamera);
 
         struct Light
         {
@@ -30,9 +31,9 @@ namespace Core
         const std::vector<Light>& getLights() const { return m_lights; }
 
     private:
-        Core::Camera m_camera;
-        std::vector<std::shared_ptr<::Scene::Model>> m_models;
+        Pinnacle::Camera* m_pCamera;
+        std::vector<std::shared_ptr<Pinnacle::Model>> m_models;
         std::vector<Light> m_lights;
         // TODO: Add lights, etc.
     };
-} // namespace Core
+} // namespace Pinnacle

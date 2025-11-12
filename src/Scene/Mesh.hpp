@@ -16,7 +16,7 @@ namespace NS
     using UInteger = unsigned long;
 }
 
-namespace Scene
+namespace Pinnacle
 {
     class Material;
 
@@ -30,18 +30,18 @@ namespace Scene
     class Mesh
     {
     public:
-        Mesh(MTL::Device* pDevice, const std::vector<Vertex>& vertices, const std::vector<uint16_t>& indices, std::shared_ptr<Material> pMaterial);
+        Mesh(MTL::Device* pDevice, const std::vector<Vertex>& vertices, const std::vector<uint16_t>& indices, std::shared_ptr<Pinnacle::Material> pMaterial);
         ~Mesh();
 
         MTL::Buffer* getVertexBuffer() const { return m_pVertexBuffer; }
         MTL::Buffer* getIndexBuffer() const { return m_pIndexBuffer; }
         NS::UInteger getIndexCount() const { return m_indexCount; }
-        std::shared_ptr<Material> getMaterial() const { return m_pMaterial; }
+        std::shared_ptr<Pinnacle::Material> getMaterial() const { return m_pMaterial; }
 
     private:
         MTL::Buffer* m_pVertexBuffer;
         MTL::Buffer* m_pIndexBuffer;
         NS::UInteger m_indexCount;
-        std::shared_ptr<Material> m_pMaterial;
+        std::shared_ptr<Pinnacle::Material> m_pMaterial;
     };
-} // namespace Scene
+} // namespace Pinnacle

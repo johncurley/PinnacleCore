@@ -12,9 +12,10 @@ namespace MTL
     class DepthStencilState;
     class RenderCommandEncoder;
     class SamplerState;
+    class Buffer;
 }
 
-namespace Renderer
+namespace Pinnacle
 {
     class Renderer
     {
@@ -22,7 +23,9 @@ namespace Renderer
         Renderer(MTL::Device* pDevice);
         ~Renderer();
 
-        void draw(MTL::RenderCommandEncoder* pRenderEncoder, Core::Scene& scene);
+        void draw(MTKView* pView);
+        void setScene(Scene* pScene);
+        void resize(float width, float height);
 
         MTL::CommandQueue* getCommandQueue() const { return m_pCommandQueue; }
 
@@ -35,5 +38,6 @@ namespace Renderer
         MTL::SamplerState* m_pSamplerState;
         MTL::Buffer* m_pLightsBuffer;
         MTL::Buffer* m_pNumLightsBuffer;
+        Scene* m_pScene;
     };
-} // namespace Renderer
+} // namespace Pinnacle

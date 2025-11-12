@@ -3,6 +3,7 @@
 #include "Node.hpp"
 #include "Texture.hpp"
 #include "Material.hpp"
+#include "tiny_gltf.h"
 
 #include <vector>
 #include <string>
@@ -14,7 +15,7 @@ namespace MTL
     class Device;
 }
 
-namespace Scene
+namespace Pinnacle
 {
     class Model
     {
@@ -31,5 +32,7 @@ namespace Scene
         std::vector<std::shared_ptr<Node>> m_nodes;
         std::vector<std::shared_ptr<Texture>> m_textures;
         std::vector<std::shared_ptr<Material>> m_materials;
+        std::unique_ptr<tinygltf::Model> m_gltfModel;
+        std::shared_ptr<Texture> m_pDefaultTexture;
     };
-} // namespace Scene
+} // namespace Pinnacle
