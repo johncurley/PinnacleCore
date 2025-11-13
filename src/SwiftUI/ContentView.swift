@@ -38,6 +38,9 @@ struct ContentView: View {
     @State private var currentModelPath: String = "Models/Box/glTF/Box.gltf"
     @State private var currentModelName: String = "Box.gltf"
     @State private var recentFiles: [String] = []
+    @State private var lastExportedUSDZ: String? = nil
+    @State private var showExportError: Bool = false
+    @State private var exportErrorMessage: String = ""
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
@@ -82,6 +85,22 @@ struct ContentView: View {
                             Label("Open Model...", systemImage: "doc.badge.plus")
                         }
                         .keyboardShortcut("o", modifiers: [.command])
+
+                        Divider()
+
+                        // USDZ Export & AR
+                        Button(action: exportToUSDZ) {
+                            Label("Export to USDZ...", systemImage: "cube.transparent")
+                        }
+                        .disabled(currentModelPath.isEmpty)
+
+                        if let usdzPath = lastExportedUSDZ {
+                            Button(action: {
+                                USDZExportBridge.openInARQuickLook(usdzPath)
+                            }) {
+                                Label("Preview in AR Quick Look", systemImage: "arkit")
+                            }
+                        }
 
                         if !recentFiles.isEmpty {
                             Divider()
@@ -232,6 +251,11 @@ struct ContentView: View {
             // For now, let's assume a model exists at this relative path.
             metalView.loadModel(filename: "Models/Box/glTF/Box.gltf")
         }
+        .alert("Export Error", isPresented: $showExportError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(exportErrorMessage)
+        }
     }
 
     // MARK: - View Mode Management
@@ -250,17 +274,28 @@ struct ContentView: View {
 
     // MARK: - Model Loading
 
-    /// Open file picker to select a glTF/GLB model
+    /// Open file picker to select a glTF/GLB/USDZ model
     private func openFilePicker() {
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
         panel.canChooseFiles = true
-        panel.allowedContentTypes = [.init(filenameExtension: "gltf")!, .init(filenameExtension: "glb")!]
-        panel.message = "Select a glTF or GLB model file"
+        panel.allowedContentTypes = [
+            .init(filenameExtension: "gltf")!,
+            .init(filenameExtension: "glb")!,
+            .init(filenameExtension: "usdz")!
+        ]
+        panel.message = "Select a 3D model file (glTF, GLB, or USDZ)"
 
         if panel.runModal() == .OK, let url = panel.url {
-            loadModel(path: url.path)
+            let ext = url.pathExtension.lowercased()
+            if ext == "usdz" {
+                // USDZ files can be previewed in AR Quick Look but not loaded in the viewer
+                lastExportedUSDZ = url.path
+                USDZExportBridge.openInARQuickLook(url.path)
+            } else {
+                loadModel(path: url.path)
+            }
         }
     }
 
@@ -307,16 +342,58 @@ struct ContentView: View {
         _ = provider.loadObject(ofClass: URL.self) { url, error in
             guard let url = url, error == nil else { return }
 
-            // Check if it's a glTF or GLB file
+            // Check if it's a supported file type
             let ext = url.pathExtension.lowercased()
-            guard ext == "gltf" || ext == "glb" else { return }
+            guard ext == "gltf" || ext == "glb" || ext == "usdz" else { return }
 
             DispatchQueue.main.async {
-                loadModel(path: url.path)
+                if ext == "usdz" {
+                    // USDZ files can be previewed in AR Quick Look
+                    lastExportedUSDZ = url.path
+                    USDZExportBridge.openInARQuickLook(url.path)
+                } else {
+                    loadModel(path: url.path)
+                }
             }
         }
 
         return true
+    }
+
+    // MARK: - USDZ Export
+
+    /// Export current model to USDZ format
+    private func exportToUSDZ() {
+        // Check if converter is available
+        if !USDZExportBridge.isUSDZConverterAvailable() {
+            exportErrorMessage = "USDZ converter not found. Please install Xcode Command Line Tools:\nxcode-select --install"
+            showExportError = true
+            return
+        }
+
+        // Show save panel
+        let savePanel = NSSavePanel()
+        savePanel.allowedContentTypes = [.init(filenameExtension: "usdz")!]
+        savePanel.nameFieldStringValue = URL(fileURLWithPath: currentModelPath).deletingPathExtension().lastPathComponent + ".usdz"
+        savePanel.message = "Export model to USDZ for AR Quick Look"
+
+        if savePanel.runModal() == .OK, let outputURL = savePanel.url {
+            // Perform conversion in background
+            DispatchQueue.global(qos: .userInitiated).async {
+                let result = USDZExportBridge.convert(toUSDZ: currentModelPath, outputPath: outputURL.path)
+
+                DispatchQueue.main.async {
+                    if result.success {
+                        lastExportedUSDZ = result.outputPath
+                        // Optionally show success message or auto-open in AR Quick Look
+                        print("✓ Successfully exported to USDZ: \(result.outputPath ?? "")")
+                    } else {
+                        exportErrorMessage = result.errorMessage ?? "Unknown error during USDZ conversion"
+                        showExportError = true
+                    }
+                }
+            }
+        }
     }
 }
 
