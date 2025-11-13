@@ -3,6 +3,8 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import "ShaderEditorBridge.h"
+#import "SceneInspectorBridge.h"
 
 #ifdef __cplusplus
 // Forward declaration of the C++ interface

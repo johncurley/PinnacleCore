@@ -34,6 +34,9 @@ public:
     id getVertexDescriptor() override;
     id<MTLDevice> getDevice() const { return _pDevice; }
 
+    // Scene inspection
+    std::shared_ptr<Pinnacle::Model> getModel() const { return _pModel; }
+
 private:
     id<MTLDevice> _pDevice;
     id<MTLCommandQueue> _pCommandQueue;

@@ -30,12 +30,14 @@ namespace Pinnacle
         id getVertexBuffer() const { return m_pVertexBuffer; }
         id getIndexBuffer() const { return m_pIndexBuffer; }
         size_t getIndexCount() const { return m_indexCount; }
+        size_t getVertexCount() const { return m_vertexCount; }
         std::shared_ptr<Pinnacle::Material> getMaterial() const { return m_pMaterial; }
 
     private:
         id m_pVertexBuffer; // id<MTLBuffer>
         id m_pIndexBuffer; // id<MTLBuffer>
         size_t m_indexCount;
+        size_t m_vertexCount;
         std::shared_ptr<Pinnacle::Material> m_pMaterial;
     };
 } // namespace Pinnacle

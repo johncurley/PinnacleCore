@@ -5,7 +5,7 @@
 namespace Pinnacle
 {
     Mesh::Mesh(id device, const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::shared_ptr<Pinnacle::Material> pMaterial)
-        : m_pVertexBuffer(nil), m_pIndexBuffer(nil), m_indexCount(indices.size()), m_pMaterial(pMaterial)
+        : m_pVertexBuffer(nil), m_pIndexBuffer(nil), m_indexCount(indices.size()), m_vertexCount(vertices.size()), m_pMaterial(pMaterial)
     {
         id<MTLDevice> mtlDevice = (id<MTLDevice>)device;
 

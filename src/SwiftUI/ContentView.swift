@@ -3,15 +3,18 @@ import SwiftUI
 struct ContentView: View {
     @State private var metalView = MetalView()
     @State private var showShaderEditor = false
+    @State private var showSceneInspector = true
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
+    @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
     init() {
         let view = MetalView()
         _metalView = State(initialValue: view)
 
-        // Get renderer from metal view for shader editor
+        // Get renderer from metal view
         let renderer = view.bridge.getRenderer()
         _shaderEditorViewModel = StateObject(wrappedValue: ShaderEditorViewModel(renderer: renderer))
+        _sceneInspectorViewModel = StateObject(wrappedValue: SceneInspectorViewModel(renderer: renderer))
     }
 
     var body: some View {
@@ -25,6 +28,13 @@ struct ContentView: View {
 
                     Spacer()
 
+                    Button(action: { showSceneInspector.toggle() }) {
+                        Label(showSceneInspector ? "Hide Inspector" : "Show Inspector",
+                              systemImage: "sidebar.left")
+                    }
+                    .keyboardShortcut("i", modifiers: [.command, .option])
+                    .help("Toggle Scene Inspector (⌘⌥I)")
+
                     Button(action: { showShaderEditor.toggle() }) {
                         Label(showShaderEditor ? "Hide Shader Editor" : "Show Shader Editor",
                               systemImage: "chevron.left.slash.chevron.right")
@@ -37,20 +47,23 @@ struct ContentView: View {
 
                 Divider()
 
-                // Main content
-                if showShaderEditor {
-                    HSplitView {
-                        // Left: 3D Viewer
-                        metalView
-                            .frame(minWidth: 400)
-
-                        // Right: Shader Editor
-                        ShaderEditorView(viewModel: shaderEditorViewModel)
-                            .frame(minWidth: 600)
+                // Main content - Three-panel layout
+                HSplitView {
+                    // Left: Scene Inspector (optional)
+                    if showSceneInspector {
+                        SceneInspectorView(viewModel: sceneInspectorViewModel)
+                            .frame(minWidth: 250, idealWidth: 300, maxWidth: 400)
                     }
-                } else {
-                    // Full-width 3D viewer
+
+                    // Center: 3D Viewer
                     metalView
+                        .frame(minWidth: 400)
+
+                    // Right: Shader Editor (optional)
+                    if showShaderEditor {
+                        ShaderEditorView(viewModel: shaderEditorViewModel)
+                            .frame(minWidth: 600, idealWidth: 700)
+                    }
                 }
             }
         }
