@@ -8,6 +8,7 @@
 #import "CameraControlsBridge.h"
 #import "EnvironmentControlsBridge.h"
 #import "USDZExportBridge.h"
+#import "MaterialFixerBridge.h"
 
 #ifdef __cplusplus
 // Forward declaration of the C++ interface

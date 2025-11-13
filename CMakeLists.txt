@@ -22,6 +22,7 @@ set(SWIFT_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ShaderEditorView.swift
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ShaderEditorViewModel.swift
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/SceneInspectorView.swift
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/MaterialCreatorView.swift
 )
 
 set(OBJCXX_FILES
@@ -45,6 +46,7 @@ set(OBJCXX_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/CameraControlsBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/EnvironmentControlsBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/USDZExportBridge.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/MaterialFixerBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/PinnacleMetalImplementation.mm
 )
 

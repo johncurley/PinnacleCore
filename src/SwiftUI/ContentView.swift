@@ -41,6 +41,7 @@ struct ContentView: View {
     @State private var lastExportedUSDZ: String? = nil
     @State private var showExportError: Bool = false
     @State private var exportErrorMessage: String = ""
+    @State private var showMaterialCreator: Bool = false
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
@@ -100,6 +101,15 @@ struct ContentView: View {
                             }) {
                                 Label("Preview in AR Quick Look", systemImage: "arkit")
                             }
+                        }
+
+                        Divider()
+
+                        // Material Tools
+                        Button(action: {
+                            showMaterialCreator = true
+                        }) {
+                            Label("Material Creator...", systemImage: "wand.and.stars")
                         }
 
                         if !recentFiles.isEmpty {
@@ -255,6 +265,9 @@ struct ContentView: View {
             Button("OK", role: .cancel) { }
         } message: {
             Text(exportErrorMessage)
+        }
+        .sheet(isPresented: $showMaterialCreator) {
+            MaterialCreatorView()
         }
     }
 
