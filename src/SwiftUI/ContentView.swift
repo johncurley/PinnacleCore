@@ -42,6 +42,7 @@ struct ContentView: View {
     @State private var showExportError: Bool = false
     @State private var exportErrorMessage: String = ""
     @State private var showMaterialCreator: Bool = false
+    @State private var showBatchConverter: Bool = false
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
@@ -110,6 +111,12 @@ struct ContentView: View {
                             showMaterialCreator = true
                         }) {
                             Label("Material Creator...", systemImage: "wand.and.stars")
+                        }
+
+                        Button(action: {
+                            showBatchConverter = true
+                        }) {
+                            Label("Batch Converter...", systemImage: "square.stack.3d.up")
                         }
 
                         if !recentFiles.isEmpty {
@@ -268,6 +275,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showMaterialCreator) {
             MaterialCreatorView()
+        }
+        .sheet(isPresented: $showBatchConverter) {
+            BatchConverterView(renderer: metalView.bridge.getRenderer())
         }
     }
 

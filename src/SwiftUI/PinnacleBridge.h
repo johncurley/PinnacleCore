@@ -9,6 +9,7 @@
 #import "EnvironmentControlsBridge.h"
 #import "USDZExportBridge.h"
 #import "MaterialFixerBridge.h"
+#import "BatchConverterBridge.h"
 
 #ifdef __cplusplus
 // Forward declaration of the C++ interface
