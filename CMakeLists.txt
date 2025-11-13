@@ -31,6 +31,11 @@ set(OBJCXX_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Model.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Node.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Texture.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ShaderEditor/ShaderSource.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ShaderEditor/ShaderCompiler.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ShaderEditor/ShaderEditor.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ShaderEditor/ShaderLibrary.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ShaderEditor/ShaderEditorExample.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/PinnacleBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/PinnacleMetalImplementation.mm
 )

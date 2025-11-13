@@ -45,6 +45,9 @@ PinnacleMetalRenderer::PinnacleMetalRenderer() {
     _pMaterialBuffer = nil;
     _pLightBuffer = nil;
     _pModel = nullptr;
+    _pDefaultPipelineState = nil;
+    _pVertexDescriptor = nil;
+    _usingCustomShader = false;
 
     buildShaders();
 
@@ -86,6 +89,8 @@ PinnacleMetalRenderer::~PinnacleMetalRenderer() {
     [_pSamplerState release];
     [_pDepthStencilState release];
     [_pPipelineState release];
+    [_pDefaultPipelineState release];
+    [_pVertexDescriptor release];
     [_pShaderLibrary release];
     [_pCommandQueue release];
     [_pDevice release];
@@ -159,7 +164,13 @@ void PinnacleMetalRenderer::buildShaders() {
 
     if (!_pPipelineState) {
         NSLog(@"Failed to create pipeline state: %@", error);
+    } else {
+        // Cache the default pipeline state for hot-reload reset functionality
+        _pDefaultPipelineState = [_pPipelineState retain];
     }
+
+    // Cache vertex descriptor for shader editor
+    _pVertexDescriptor = [vertexDescriptor retain];
 
     [vertexFunction release];
     [fragmentFunction release];
@@ -315,6 +326,50 @@ void PinnacleMetalRenderer::draw(void* metalLayer) {
 
     [pCommandBuffer commit];
     [pPool release];
+}
+
+// Shader hot-reload interface implementation
+
+bool PinnacleMetalRenderer::setCustomPipelineState(id pipelineState) {
+    if (!pipelineState) {
+        NSLog(@"Cannot set null pipeline state");
+        return false;
+    }
+
+    id<MTLRenderPipelineState> newState = (id<MTLRenderPipelineState>)pipelineState;
+
+    // Release old custom pipeline state if we were using one
+    if (_usingCustomShader && _pPipelineState != _pDefaultPipelineState) {
+        [_pPipelineState release];
+    }
+
+    // Set new pipeline state
+    _pPipelineState = [newState retain];
+    _usingCustomShader = true;
+
+    NSLog(@"✓ Custom shader pipeline applied");
+    return true;
+}
+
+void PinnacleMetalRenderer::resetToDefaultShaders() {
+    if (!_usingCustomShader) {
+        return; // Already using default shaders
+    }
+
+    // Release custom pipeline state
+    if (_pPipelineState != _pDefaultPipelineState) {
+        [_pPipelineState release];
+    }
+
+    // Restore default pipeline state
+    _pPipelineState = _pDefaultPipelineState;
+    _usingCustomShader = false;
+
+    NSLog(@"✓ Reset to default shaders");
+}
+
+id PinnacleMetalRenderer::getVertexDescriptor() {
+    return _pVertexDescriptor;
 }
 
 // Factory function implementation

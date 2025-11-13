@@ -3,6 +3,7 @@
 
 #include "PinnacleMetalRendererInterface.h" // Include the interface
 #include "Scene/Model.hpp" // For Pinnacle::Model
+#include "ShaderEditor/ShaderEditor.hpp" // For shader hot-reload interface
 
 #include <string>
 #include <iostream>
@@ -17,14 +18,21 @@
 @protocol MTLBuffer;
 @protocol MTLDepthStencilState;
 @protocol MTLSamplerState;
+@protocol MTLVertexDescriptor;
 
-class PinnacleMetalRenderer : public IPinnacleMetalRenderer {
+class PinnacleMetalRenderer : public IPinnacleMetalRenderer, public Pinnacle::RendererShaderInterface {
 public:
     PinnacleMetalRenderer();
     ~PinnacleMetalRenderer();
 
     void loadModel(const char* filename) override;
     void draw(void* metalLayer) override; // void* representing CAMetalLayer*
+
+    // Shader hot-reload interface
+    bool setCustomPipelineState(id pipelineState) override;
+    void resetToDefaultShaders() override;
+    id getVertexDescriptor() override;
+    id<MTLDevice> getDevice() const { return _pDevice; }
 
 private:
     id<MTLDevice> _pDevice;
@@ -39,6 +47,11 @@ private:
 
     // Model data
     std::shared_ptr<Pinnacle::Model> _pModel;
+
+    // Shader hot-reload support
+    id<MTLRenderPipelineState> _pDefaultPipelineState;  // Original default pipeline
+    id<MTLVertexDescriptor> _pVertexDescriptor;         // Cached vertex descriptor
+    bool _usingCustomShader;                            // Flag for custom shader state
 
     void buildShaders();
     void drawModel(id<MTLRenderCommandEncoder> renderEncoder);
