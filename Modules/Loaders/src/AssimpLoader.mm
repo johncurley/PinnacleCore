@@ -1,9 +1,9 @@
 #import <Metal/Metal.h>
 #import <Foundation/Foundation.h>
-#include "AssimpLoader.hpp"
-#include "Mesh.hpp"
-#include "Material.hpp"
-#include "Texture.hpp"
+#include "Loaders/AssimpLoader.hpp"
+#include "Core/Mesh.hpp"
+#include "Core/Material.hpp"
+#include "Core/Texture.hpp"
 
 // Assimp includes
 #include <assimp/Importer.hpp>

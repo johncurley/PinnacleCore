@@ -1,10 +1,10 @@
 #import <Metal/Metal.h>
 #import <Foundation/Foundation.h>
-#include "Model.hpp"
-#include "Mesh.hpp"
-#include "Material.hpp"
-#include "Texture.hpp"
-#include "AssimpLoader.hpp"
+#include "Loaders/Model.hpp"
+#include "Core/Mesh.hpp"
+#include "Core/Material.hpp"
+#include "Core/Texture.hpp"
+#include "Loaders/AssimpLoader.hpp"
 
 #define TINYGLTF_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION

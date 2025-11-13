@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Mesh.hpp"
-#include "Texture.hpp"
-#include "Material.hpp"
+#include "Core/Mesh.hpp"
+#include "Core/Texture.hpp"
+#include "Core/Material.hpp"
 
 #include <vector>
 #include <string>

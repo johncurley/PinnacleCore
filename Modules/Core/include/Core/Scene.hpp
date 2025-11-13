@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Camera.hpp"
-#include "../Scene/Model.hpp"
+#include "Core/Camera.hpp"
+#include "Loaders/Model.hpp"
 
 #include <vector>
 #include <memory>

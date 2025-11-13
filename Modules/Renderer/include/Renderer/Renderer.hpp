@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core/Scene.hpp"
+#include "Core/Scene.hpp"
 
 // Forward declarations for Metal types
 namespace MTL
