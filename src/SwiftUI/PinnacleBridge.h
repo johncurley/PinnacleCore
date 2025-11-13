@@ -12,6 +12,7 @@
 #import "BatchConverterBridge.h"
 #import "TextureManagerBridge.h"
 #import "ModelValidatorBridge.h"
+#import "AssetOptimizerBridge.h"
 
 #ifdef __cplusplus
 // Forward declaration of the C++ interface

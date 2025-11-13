@@ -45,6 +45,7 @@ struct ContentView: View {
     @State private var showBatchConverter: Bool = false
     @State private var showTextureManager: Bool = false
     @State private var showModelValidator: Bool = false
+    @State private var showAssetOptimizer: Bool = false
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
@@ -131,6 +132,14 @@ struct ContentView: View {
                             showModelValidator = true
                         }) {
                             Label("Model Validator...", systemImage: "checkmark.shield")
+                        }
+
+                        Divider()
+
+                        Button(action: {
+                            showAssetOptimizer = true
+                        }) {
+                            Label("Asset Optimizer...", systemImage: "wand.and.stars.inverse")
                         }
 
                         if !recentFiles.isEmpty {
@@ -298,6 +307,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showModelValidator) {
             ModelValidatorView(renderer: metalView.bridge.getRenderer())
+        }
+        .sheet(isPresented: $showAssetOptimizer) {
+            AssetOptimizerView(renderer: metalView.bridge.getRenderer())
         }
     }
 
