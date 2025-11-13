@@ -1,9 +1,38 @@
 import SwiftUI
 
+// View mode options for the PBR viewer
+enum ViewMode: String, CaseIterable, Identifiable {
+    case pbr = "PBR"
+    case unlit = "Unlit"
+    case wireframe = "Wireframe"
+    case normals = "Normals"
+
+    var id: String { rawValue }
+
+    var iconName: String {
+        switch self {
+        case .pbr: return "cube.fill"
+        case .unlit: return "circle"
+        case .wireframe: return "square.grid.3x3"
+        case .normals: return "arrow.up.and.down.and.arrow.left.and.right"
+        }
+    }
+
+    var presetName: String? {
+        switch self {
+        case .pbr: return nil  // Default shader
+        case .unlit: return "Unlit"
+        case .wireframe: return "Wireframe"
+        case .normals: return "Normal Visualizer"
+        }
+    }
+}
+
 struct ContentView: View {
     @State private var metalView = MetalView()
     @State private var showShaderEditor = false
     @State private var showSceneInspector = true
+    @State private var selectedViewMode: ViewMode = .pbr
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
@@ -25,6 +54,26 @@ struct ContentView: View {
                     Text("PinnacleCore")
                         .font(.title2)
                         .bold()
+
+                    Spacer()
+
+                    // View Mode Picker
+                    HStack(spacing: 8) {
+                        Text("View:")
+                            .foregroundColor(.secondary)
+
+                        Picker("", selection: $selectedViewMode) {
+                            ForEach(ViewMode.allCases) { mode in
+                                Label(mode.rawValue, systemImage: mode.iconName)
+                                    .tag(mode)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .frame(width: 260)
+                        .onChange(of: selectedViewMode) { newMode in
+                            applyViewMode(newMode)
+                        }
+                    }
 
                     Spacer()
 
@@ -72,6 +121,20 @@ struct ContentView: View {
             // Load a sample model. You might need to adjust the path.
             // For now, let's assume a model exists at this relative path.
             metalView.loadModel(filename: "Models/Box/glTF/Box.gltf")
+        }
+    }
+
+    // MARK: - View Mode Management
+
+    /// Apply the selected view mode by loading and applying the appropriate shader preset
+    private func applyViewMode(_ mode: ViewMode) {
+        if let presetName = mode.presetName {
+            // Load and apply preset shader
+            shaderEditorViewModel.loadPreset(presetName)
+            shaderEditorViewModel.applyShader()
+        } else {
+            // Reset to default PBR shader
+            shaderEditorViewModel.resetToDefaults()
         }
     }
 }
