@@ -1,36 +1,90 @@
 // Removed metal-cpp includes and defines
 #import <MetalKit/MetalKit.h> // Include MetalKit for Objective-C Metal types
 #import <Foundation/Foundation.h> // For NSBundle
+#import <simd/simd.h>
 
 #include "PinnacleMetalRenderer.h" // Include the concrete renderer declaration
+#include "Scene/Model.hpp"
+#include "Scene/Mesh.hpp"
+#include "Scene/Material.hpp"
 
-// Uniforms structure for our shader
+// Uniforms structure matching the shader
 struct Uniforms {
-    vector_float4 modelColor;
+    simd_float4x4 modelMatrix;
+    simd_float4x4 viewMatrix;
+    simd_float4x4 projectionMatrix;
+    simd_float3 cameraPosition;
+};
+
+// Material uniforms matching the shader
+struct MaterialUniforms {
+    simd_float4 baseColorFactor;
+    float metallicFactor;
+    float roughnessFactor;
+    int hasBaseColorTexture;
+    int hasMetallicRoughnessTexture;
+    int hasNormalTexture;
+};
+
+// Light structure matching the shader
+struct Light {
+    simd_float3 direction;
+    simd_float3 color;
+    float intensity;
 };
 
 // Implementation of PinnacleMetalRenderer methods
 PinnacleMetalRenderer::PinnacleMetalRenderer() {
     _pDevice = MTLCreateSystemDefaultDevice();
     _pCommandQueue = [_pDevice newCommandQueue];
-    _pShaderLibrary = nil; // Initialize to nil
-    _pPipelineState = nil; // Initialize to nil
-    _pUniformBuffer = nil; // Initialize to nil
+    _pShaderLibrary = nil;
+    _pPipelineState = nil;
+    _pDepthStencilState = nil;
+    _pSamplerState = nil;
+    _pUniformBuffer = nil;
+    _pMaterialBuffer = nil;
+    _pLightBuffer = nil;
+    _pModel = nullptr;
 
     buildShaders();
+
+    // Create depth stencil state
+    MTLDepthStencilDescriptor* depthDescriptor = [[MTLDepthStencilDescriptor alloc] init];
+    depthDescriptor.depthCompareFunction = MTLCompareFunctionLess;
+    depthDescriptor.depthWriteEnabled = YES;
+    _pDepthStencilState = [_pDevice newDepthStencilStateWithDescriptor:depthDescriptor];
+    [depthDescriptor release];
+
+    // Create sampler state
+    MTLSamplerDescriptor* samplerDescriptor = [[MTLSamplerDescriptor alloc] init];
+    samplerDescriptor.minFilter = MTLSamplerMinMagFilterLinear;
+    samplerDescriptor.magFilter = MTLSamplerMinMagFilterLinear;
+    samplerDescriptor.mipFilter = MTLSamplerMipFilterLinear;
+    samplerDescriptor.sAddressMode = MTLSamplerAddressModeRepeat;
+    samplerDescriptor.tAddressMode = MTLSamplerAddressModeRepeat;
+    _pSamplerState = [_pDevice newSamplerStateWithDescriptor:samplerDescriptor];
+    [samplerDescriptor release];
+
+    // Create uniform buffers
+    _pUniformBuffer = [_pDevice newBufferWithLength:sizeof(Uniforms) options:MTLResourceStorageModeShared];
+    _pMaterialBuffer = [_pDevice newBufferWithLength:sizeof(MaterialUniforms) options:MTLResourceStorageModeShared];
+    _pLightBuffer = [_pDevice newBufferWithLength:sizeof(Light) options:MTLResourceStorageModeShared];
+
+    // Initialize light
+    Light* light = (Light*)[_pLightBuffer contents];
+    light->direction = simd_make_float3(0.5f, -1.0f, 0.5f);
+    light->color = simd_make_float3(1.0f, 1.0f, 1.0f);
+    light->intensity = 1.0f;
 }
 
 PinnacleMetalRenderer::~PinnacleMetalRenderer() {
     // Manual release calls for non-ARC environment
-    for (id<MTLBuffer> buffer : _vertexBuffers) {
-        [buffer release];
-    }
-    _vertexBuffers.clear();
-    for (id<MTLBuffer> buffer : _indexBuffers) {
-        [buffer release];
-    }
-    _indexBuffers.clear();
+    _pModel.reset();
+    [_pLightBuffer release];
+    [_pMaterialBuffer release];
     [_pUniformBuffer release];
+    [_pSamplerState release];
+    [_pDepthStencilState release];
     [_pPipelineState release];
     [_pShaderLibrary release];
     [_pCommandQueue release];
@@ -38,43 +92,11 @@ PinnacleMetalRenderer::~PinnacleMetalRenderer() {
 }
 
 void PinnacleMetalRenderer::loadModel(const char* filename) {
-    tinygltf::TinyGLTF loader;
-    std::string err;
-    std::string warn;
-
-    bool res = loader.LoadASCIIFromFile(&_gltfModel, &err, &warn, filename);
-    if (!warn.empty()) {
-        std::cout << "WARN: " << warn << std::endl;
-    }
-
-    if (!err.empty()) {
-        std::cout << "ERR: " << err << std::endl;
-    }
-
-    if (!res) {
-        std::cout << "Failed to load glTF: " << filename << std::endl;
-    } else {
-        std::cout << "Successfully loaded glTF: " << filename << std::endl;
-        setupModelBuffers(); // Setup Metal buffers after loading the model
-
-        // Setup uniform buffer with model color
-        Uniforms uniforms;
-        if (!_gltfModel.materials.empty()) {
-            const tinygltf::Material& material = _gltfModel.materials[0];
-            if (material.pbrMetallicRoughness.baseColorFactor.size() == 4) {
-                uniforms.modelColor = {
-                    (float)material.pbrMetallicRoughness.baseColorFactor[0],
-                    (float)material.pbrMetallicRoughness.baseColorFactor[1],
-                    (float)material.pbrMetallicRoughness.baseColorFactor[2],
-                    (float)material.pbrMetallicRoughness.baseColorFactor[3]
-                };
-            } else {
-                uniforms.modelColor = {1.0f, 1.0f, 1.0f, 1.0f}; // Default to white
-            }
-        } else {
-            uniforms.modelColor = {1.0f, 1.0f, 1.0f, 1.0f}; // Default to white
-        }
-        _pUniformBuffer = [_pDevice newBufferWithBytes:&uniforms length:sizeof(uniforms) options:MTLResourceStorageModeShared];
+    try {
+        _pModel = std::make_shared<Pinnacle::Model>(_pDevice, std::string(filename));
+        std::cout << "Model loaded successfully with " << _pModel->getMeshes().size() << " meshes" << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Failed to load model: " << e.what() << std::endl;
     }
 }
 
@@ -107,15 +129,28 @@ void PinnacleMetalRenderer::buildShaders() {
     pipelineDescriptor.vertexFunction = vertexFunction;
     pipelineDescriptor.fragmentFunction = fragmentFunction;
     pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
+    pipelineDescriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
 
-    // Create a vertex descriptor
+    // Create a vertex descriptor matching our Vertex struct
     MTLVertexDescriptor* vertexDescriptor = [[MTLVertexDescriptor alloc] init];
-    // Position attribute
+
+    // Position attribute (float3)
     vertexDescriptor.attributes[0].format = MTLVertexFormatFloat3;
     vertexDescriptor.attributes[0].offset = 0;
     vertexDescriptor.attributes[0].bufferIndex = 0;
-    // Layout for buffer 0
-    vertexDescriptor.layouts[0].stride = sizeof(float) * 3; // 3 floats for position
+
+    // Normal attribute (float3)
+    vertexDescriptor.attributes[1].format = MTLVertexFormatFloat3;
+    vertexDescriptor.attributes[1].offset = sizeof(simd_float3);
+    vertexDescriptor.attributes[1].bufferIndex = 0;
+
+    // TexCoords attribute (float2)
+    vertexDescriptor.attributes[2].format = MTLVertexFormatFloat2;
+    vertexDescriptor.attributes[2].offset = sizeof(simd_float3) * 2;
+    vertexDescriptor.attributes[2].bufferIndex = 0;
+
+    // Layout for buffer 0 (vertices)
+    vertexDescriptor.layouts[0].stride = sizeof(simd_float3) * 2 + sizeof(simd_float2); // position + normal + texCoords
     vertexDescriptor.layouts[0].stepFunction = MTLVertexStepFunctionPerVertex;
 
     pipelineDescriptor.vertexDescriptor = vertexDescriptor;
@@ -129,78 +164,65 @@ void PinnacleMetalRenderer::buildShaders() {
     [vertexFunction release];
     [fragmentFunction release];
     [pipelineDescriptor release];
-    [vertexDescriptor release]; // Release the vertex descriptor
-}
-
-void PinnacleMetalRenderer::setupModelBuffers() {
-    if (_gltfModel.meshes.empty()) return;
-
-    for (const auto& mesh : _gltfModel.meshes) {
-        for (const auto& primitive : mesh.primitives) {
-            // Vertices (POSITION attribute)
-            auto positionAttribute = primitive.attributes.find("POSITION");
-            if (positionAttribute != primitive.attributes.end()) {
-                const tinygltf::Accessor& accessor = _gltfModel.accessors[positionAttribute->second];
-                const tinygltf::BufferView& bufferView = _gltfModel.bufferViews[accessor.bufferView];
-                const tinygltf::Buffer& buffer = _gltfModel.buffers[bufferView.buffer];
-
-                id<MTLBuffer> vertexBuffer = [_pDevice newBufferWithBytes:buffer.data.data() + bufferView.byteOffset + accessor.byteOffset
-                                                                    length:bufferView.byteLength
-                                                                   options:MTLResourceStorageModeShared];
-                _vertexBuffers.push_back([vertexBuffer retain]); // Retain and add to vector
-                [vertexBuffer release]; // Release the temporary ownership
-            }
-
-            // Indices
-            if (primitive.indices > -1) {
-                const tinygltf::Accessor& indexAccessor = _gltfModel.accessors[primitive.indices];
-                const tinygltf::BufferView& indexBufferView = _gltfModel.bufferViews[indexAccessor.bufferView];
-                const tinygltf::Buffer& indexBuffer = _gltfModel.buffers[indexBufferView.buffer];
-
-                id<MTLBuffer> metalIndexBuffer = [_pDevice newBufferWithBytes:indexBuffer.data.data() + indexBufferView.byteOffset + indexAccessor.byteOffset
-                                                                        length:indexBufferView.byteLength
-                                                                       options:MTLResourceStorageModeShared];
-                _indexBuffers.push_back([metalIndexBuffer retain]); // Retain and add to vector
-                [metalIndexBuffer release]; // Release the temporary ownership
-
-                MTLIndexType indexType;
-                if (indexAccessor.componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
-                    indexType = MTLIndexTypeUInt16;
-                } else if (indexAccessor.componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT) {
-                    indexType = MTLIndexTypeUInt32;
-                } else {
-                    // Default to UInt16 or handle error
-                    indexType = MTLIndexTypeUInt16;
-                }
-                _indexBufferTypes.push_back(indexType);
-            }
-        }
-    }
+    [vertexDescriptor release];
 }
 
 void PinnacleMetalRenderer::drawModel(id<MTLRenderCommandEncoder> renderEncoder) {
-    if (_vertexBuffers.empty() || _indexBuffers.empty() || !_pUniformBuffer) return;
+    if (!_pModel) return;
 
-    [renderEncoder setVertexBuffer:_pUniformBuffer offset:0 atIndex:1]; // Set uniform buffer at index 1
+    // Set uniforms
+    [renderEncoder setVertexBuffer:_pUniformBuffer offset:0 atIndex:1];
+    [renderEncoder setFragmentBuffer:_pUniformBuffer offset:0 atIndex:1];
+    [renderEncoder setFragmentBuffer:_pLightBuffer offset:0 atIndex:2];
+    [renderEncoder setFragmentSamplerState:_pSamplerState atIndex:0];
 
-    for (size_t i = 0; i < _vertexBuffers.size(); ++i) {
-        id<MTLBuffer> vertexBuffer = _vertexBuffers[i];
-        id<MTLBuffer> indexBuffer = _indexBuffers[i];
-        MTLIndexType indexType = _indexBufferTypes[i];
+    // Draw each mesh
+    for (const auto& mesh : _pModel->getMeshes()) {
+        id<MTLBuffer> vertexBuffer = (id<MTLBuffer>)mesh->getVertexBuffer();
+        id<MTLBuffer> indexBuffer = (id<MTLBuffer>)mesh->getIndexBuffer();
+        size_t indexCount = mesh->getIndexCount();
 
+        if (!vertexBuffer || !indexBuffer) continue;
+
+        // Get material
+        auto material = mesh->getMaterial();
+        if (material) {
+            const Pinnacle::PBRMaterial& pbr = material->getPBRMaterial();
+
+            // Update material buffer
+            MaterialUniforms* materialUniforms = (MaterialUniforms*)[_pMaterialBuffer contents];
+            materialUniforms->baseColorFactor = pbr.baseColorFactor;
+            materialUniforms->metallicFactor = pbr.metallicFactor;
+            materialUniforms->roughnessFactor = pbr.roughnessFactor;
+            materialUniforms->hasBaseColorTexture = (pbr.baseColorTexture != nullptr) ? 1 : 0;
+            materialUniforms->hasMetallicRoughnessTexture = (pbr.metallicRoughnessTexture != nullptr) ? 1 : 0;
+            materialUniforms->hasNormalTexture = (pbr.normalTexture != nullptr) ? 1 : 0;
+
+            [renderEncoder setFragmentBuffer:_pMaterialBuffer offset:0 atIndex:0];
+
+            // Bind base color texture if available
+            if (pbr.baseColorTexture) {
+                id<MTLTexture> texture = (id<MTLTexture>)pbr.baseColorTexture->getMTLTexture();
+                if (texture) {
+                    [renderEncoder setFragmentTexture:texture atIndex:0];
+                }
+            }
+        }
+
+        // Set vertex buffer and draw
         [renderEncoder setVertexBuffer:vertexBuffer offset:0 atIndex:0];
         [renderEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
-                                 indexCount:[indexBuffer length] / (indexType == MTLIndexTypeUInt16 ? 2 : 4)
-                                  indexType:indexType
-                                  indexBuffer:indexBuffer
-                                  indexBufferOffset:0];
+                                  indexCount:indexCount
+                                   indexType:MTLIndexTypeUInt32
+                                 indexBuffer:indexBuffer
+                           indexBufferOffset:0];
     }
 }
 
 void PinnacleMetalRenderer::draw(void* metalLayer) {
     // Cast the void* to CAMetalLayer* (Objective-C type)
     CAMetalLayer* pMetalLayer = (__bridge CAMetalLayer*)metalLayer;
-    
+
     if (!_pDevice || !_pCommandQueue || !pMetalLayer || !_pPipelineState) return;
 
     // Create an autorelease pool for the frame (manual management)
@@ -210,20 +232,85 @@ void PinnacleMetalRenderer::draw(void* metalLayer) {
     id<MTLDrawable> pDrawable = [pMetalLayer nextDrawable];
 
     if (pDrawable) {
+        // Update uniforms
+        Uniforms* uniforms = (Uniforms*)[_pUniformBuffer contents];
+
+        // Model matrix (identity for now)
+        uniforms->modelMatrix = simd_matrix4x4((simd_float4){1, 0, 0, 0},
+                                              (simd_float4){0, 1, 0, 0},
+                                              (simd_float4){0, 0, 1, 0},
+                                              (simd_float4){0, 0, 0, 1});
+
+        // View matrix (camera looking at origin from distance)
+        simd_float3 eye = simd_make_float3(0.0f, 0.0f, 5.0f);
+        simd_float3 center = simd_make_float3(0.0f, 0.0f, 0.0f);
+        simd_float3 up = simd_make_float3(0.0f, 1.0f, 0.0f);
+
+        simd_float3 f = simd_normalize(simd_sub(center, eye));
+        simd_float3 s = simd_normalize(simd_cross(f, up));
+        simd_float3 u = simd_cross(s, f);
+
+        uniforms->viewMatrix = simd_matrix4x4(
+            (simd_float4){s.x, u.x, -f.x, 0},
+            (simd_float4){s.y, u.y, -f.y, 0},
+            (simd_float4){s.z, u.z, -f.z, 0},
+            (simd_float4){-simd_dot(s, eye), -simd_dot(u, eye), simd_dot(f, eye), 1}
+        );
+
+        // Projection matrix (perspective)
+        float aspect = (float)pMetalLayer.drawableSize.width / (float)pMetalLayer.drawableSize.height;
+        float fovy = 45.0f * (3.14159265359f / 180.0f); // 45 degrees in radians
+        float near = 0.1f;
+        float far = 100.0f;
+
+        float ys = 1.0f / tanf(fovy * 0.5f);
+        float xs = ys / aspect;
+        float zs = far / (near - far);
+
+        uniforms->projectionMatrix = simd_matrix4x4(
+            (simd_float4){xs, 0, 0, 0},
+            (simd_float4){0, ys, 0, 0},
+            (simd_float4){0, 0, zs, -1},
+            (simd_float4){0, 0, near * zs, 0}
+        );
+
+        uniforms->cameraPosition = eye;
+
+        // Create depth texture
+        id<MTLTexture> colorTexture = [pDrawable texture];
+        MTLTextureDescriptor* depthDescriptor = [MTLTextureDescriptor
+            texture2DDescriptorWithPixelFormat:MTLPixelFormatDepth32Float
+            width:colorTexture.width
+            height:colorTexture.height
+            mipmapped:NO];
+        depthDescriptor.usage = MTLTextureUsageRenderTarget;
+        depthDescriptor.storageMode = MTLStorageModePrivate;
+        id<MTLTexture> depthTexture = [_pDevice newTextureWithDescriptor:depthDescriptor];
+
+        // Setup render pass
         MTLRenderPassDescriptor* pRenderPassDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-        pRenderPassDescriptor.colorAttachments[0].texture = [pDrawable texture];
+        pRenderPassDescriptor.colorAttachments[0].texture = colorTexture;
         pRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-        pRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.2, 0.2, 0.2, 1.0);
+        pRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.1, 0.1, 0.1, 1.0);
         pRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+
+        pRenderPassDescriptor.depthAttachment.texture = depthTexture;
+        pRenderPassDescriptor.depthAttachment.loadAction = MTLLoadActionClear;
+        pRenderPassDescriptor.depthAttachment.storeAction = MTLStoreActionDontCare;
+        pRenderPassDescriptor.depthAttachment.clearDepth = 1.0;
 
         id<MTLRenderCommandEncoder> pRenderEncoder = [pCommandBuffer renderCommandEncoderWithDescriptor:pRenderPassDescriptor];
         [pRenderEncoder setRenderPipelineState:_pPipelineState];
-        
+        [pRenderEncoder setDepthStencilState:_pDepthStencilState];
+        [pRenderEncoder setFrontFacingWinding:MTLWindingCounterClockwise];
+        [pRenderEncoder setCullMode:MTLCullModeBack];
+
         drawModel(pRenderEncoder); // Draw the loaded glTF model
 
         [pRenderEncoder endEncoding];
 
         [pCommandBuffer presentDrawable:pDrawable];
+        [depthTexture release];
     }
 
     [pCommandBuffer commit];

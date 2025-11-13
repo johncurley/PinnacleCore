@@ -2,11 +2,12 @@
 #define PinnacleMetalRenderer_h
 
 #include "PinnacleMetalRendererInterface.h" // Include the interface
-#include "tiny_gltf.h" // For tinygltf::Model
+#include "Scene/Model.hpp" // For Pinnacle::Model
 
 #include <string>
 #include <iostream>
 #include <vector>
+#include <memory>
 
 // Forward declarations for Objective-C Metal types
 @protocol MTLDevice;
@@ -14,6 +15,8 @@
 @protocol MTLLibrary;
 @protocol MTLRenderPipelineState;
 @protocol MTLBuffer;
+@protocol MTLDepthStencilState;
+@protocol MTLSamplerState;
 
 class PinnacleMetalRenderer : public IPinnacleMetalRenderer {
 public:
@@ -28,16 +31,16 @@ private:
     id<MTLCommandQueue> _pCommandQueue;
     id<MTLLibrary> _pShaderLibrary;
     id<MTLRenderPipelineState> _pPipelineState;
-    id<MTLBuffer> _pUniformBuffer; // Add uniform buffer
+    id<MTLDepthStencilState> _pDepthStencilState;
+    id<MTLSamplerState> _pSamplerState;
+    id<MTLBuffer> _pUniformBuffer;
+    id<MTLBuffer> _pMaterialBuffer;
+    id<MTLBuffer> _pLightBuffer;
 
-    // For glTF model data
-    tinygltf::Model _gltfModel;
-    std::vector<id<MTLBuffer>> _vertexBuffers;
-    std::vector<id<MTLBuffer>> _indexBuffers;
-    std::vector<MTLIndexType> _indexBufferTypes;
+    // Model data
+    std::shared_ptr<Pinnacle::Model> _pModel;
 
     void buildShaders();
-    void setupModelBuffers(); // New method to process glTF data into Metal buffers
     void drawModel(id<MTLRenderCommandEncoder> renderEncoder);
 };
 
