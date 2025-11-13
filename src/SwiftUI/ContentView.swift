@@ -34,6 +34,10 @@ struct ContentView: View {
     @State private var showSceneInspector = true
     @State private var selectedViewMode: ViewMode = .pbr
     @State private var showEnvironmentPanel = false
+    @State private var showFilePicker = false
+    @State private var currentModelPath: String = "Models/Box/glTF/Box.gltf"
+    @State private var currentModelName: String = "Box.gltf"
+    @State private var recentFiles: [String] = []
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
@@ -54,6 +58,11 @@ struct ContentView: View {
             cameraControlsBridge = CameraControlsBridge(renderer: renderer)
             environmentControlsBridge = EnvironmentControlsBridge(renderer: renderer)
         }
+
+        // Load recent files from UserDefaults
+        if let saved = UserDefaults.standard.array(forKey: "RecentFiles") as? [String] {
+            _recentFiles = State(initialValue: saved)
+        }
     }
 
     var body: some View {
@@ -64,6 +73,51 @@ struct ContentView: View {
                     Text("PinnacleCore")
                         .font(.title2)
                         .bold()
+
+                    Spacer()
+
+                    // Model loading menu
+                    Menu {
+                        Button(action: openFilePicker) {
+                            Label("Open Model...", systemImage: "doc.badge.plus")
+                        }
+                        .keyboardShortcut("o", modifiers: [.command])
+
+                        if !recentFiles.isEmpty {
+                            Divider()
+
+                            Menu("Recent Files") {
+                                ForEach(recentFiles.prefix(5), id: \.self) { path in
+                                    Button(action: {
+                                        loadModel(path: path)
+                                    }) {
+                                        Text(URL(fileURLWithPath: path).lastPathComponent)
+                                    }
+                                }
+
+                                if recentFiles.count > 0 {
+                                    Divider()
+                                    Button("Clear Recent Files") {
+                                        recentFiles = []
+                                        UserDefaults.standard.set([], forKey: "RecentFiles")
+                                    }
+                                }
+                            }
+                        }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "cube.box")
+                            Text(currentModelName)
+                                .font(.subheadline)
+                            Image(systemName: "chevron.down")
+                                .font(.caption)
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color(NSColor.controlBackgroundColor))
+                        .cornerRadius(6)
+                    }
+                    .help("Load Model")
 
                     Spacer()
 
@@ -151,9 +205,18 @@ struct ContentView: View {
                             .frame(minWidth: 250, idealWidth: 300, maxWidth: 400)
                     }
 
-                    // Center: 3D Viewer
-                    metalView
-                        .frame(minWidth: 400)
+                    // Center: 3D Viewer with drag & drop
+                    ZStack {
+                        metalView
+                            .frame(minWidth: 400)
+
+                        // Drag & drop overlay
+                        Color.clear
+                            .contentShape(Rectangle())
+                            .onDrop(of: [.fileURL], isTargeted: nil) { providers in
+                                handleDrop(providers: providers)
+                            }
+                    }
 
                     // Right: Shader Editor (optional)
                     if showShaderEditor {
@@ -183,6 +246,77 @@ struct ContentView: View {
             // Reset to default PBR shader
             shaderEditorViewModel.resetToDefaults()
         }
+    }
+
+    // MARK: - Model Loading
+
+    /// Open file picker to select a glTF/GLB model
+    private func openFilePicker() {
+        let panel = NSOpenPanel()
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        panel.canChooseFiles = true
+        panel.allowedContentTypes = [.init(filenameExtension: "gltf")!, .init(filenameExtension: "glb")!]
+        panel.message = "Select a glTF or GLB model file"
+
+        if panel.runModal() == .OK, let url = panel.url {
+            loadModel(path: url.path)
+        }
+    }
+
+    /// Load a model from the given file path
+    private func loadModel(path: String) {
+        // Update current model info
+        currentModelPath = path
+        currentModelName = URL(fileURLWithPath: path).lastPathComponent
+
+        // Load the model
+        metalView.loadModel(filename: path)
+
+        // Add to recent files
+        addToRecentFiles(path: path)
+
+        // Refresh scene inspector
+        sceneInspectorViewModel.refresh()
+
+        // Fit camera to new model
+        cameraControlsBridge?.fitToModel()
+    }
+
+    /// Add file path to recent files list
+    private func addToRecentFiles(path: String) {
+        // Remove if already exists
+        recentFiles.removeAll { $0 == path }
+
+        // Add to beginning
+        recentFiles.insert(path, at: 0)
+
+        // Keep only last 10
+        if recentFiles.count > 10 {
+            recentFiles = Array(recentFiles.prefix(10))
+        }
+
+        // Save to UserDefaults
+        UserDefaults.standard.set(recentFiles, forKey: "RecentFiles")
+    }
+
+    /// Handle drag and drop of model files
+    private func handleDrop(providers: [NSItemProvider]) -> Bool {
+        guard let provider = providers.first else { return false }
+
+        _ = provider.loadObject(ofClass: URL.self) { url, error in
+            guard let url = url, error == nil else { return }
+
+            // Check if it's a glTF or GLB file
+            let ext = url.pathExtension.lowercased()
+            guard ext == "gltf" || ext == "glb" else { return }
+
+            DispatchQueue.main.async {
+                loadModel(path: url.path)
+            }
+        }
+
+        return true
     }
 }
 
