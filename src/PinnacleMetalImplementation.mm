@@ -73,11 +73,19 @@ PinnacleMetalRenderer::PinnacleMetalRenderer() {
     _pMaterialBuffer = [_pDevice newBufferWithLength:sizeof(MaterialUniforms) options:MTLResourceStorageModeShared];
     _pLightBuffer = [_pDevice newBufferWithLength:sizeof(Light) options:MTLResourceStorageModeShared];
 
-    // Initialize light
+    // Initialize lighting state
+    _lightDirection = simd_make_float3(0.5f, -1.0f, 0.5f);
+    _lightColor = simd_make_float3(1.0f, 1.0f, 1.0f);
+    _lightIntensity = 1.0f;
+
+    // Initialize light buffer
     Light* light = (Light*)[_pLightBuffer contents];
-    light->direction = simd_make_float3(0.5f, -1.0f, 0.5f);
-    light->color = simd_make_float3(1.0f, 1.0f, 1.0f);
-    light->intensity = 1.0f;
+    light->direction = _lightDirection;
+    light->color = _lightColor;
+    light->intensity = _lightIntensity;
+
+    // Initialize environment state
+    _backgroundColor = simd_make_float4(0.1f, 0.1f, 0.1f, 1.0f);
 
     // Initialize camera with default values
     resetCamera();
@@ -298,7 +306,8 @@ void PinnacleMetalRenderer::draw(void* metalLayer) {
         MTLRenderPassDescriptor* pRenderPassDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
         pRenderPassDescriptor.colorAttachments[0].texture = colorTexture;
         pRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-        pRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.1, 0.1, 0.1, 1.0);
+        pRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(
+            _backgroundColor.x, _backgroundColor.y, _backgroundColor.z, _backgroundColor.w);
         pRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
 
         pRenderPassDescriptor.depthAttachment.texture = depthTexture;
@@ -481,6 +490,49 @@ void PinnacleMetalRenderer::updateCameraFromOrbit() {
 
 float PinnacleMetalRenderer::getCameraDistance() const {
     return simd_length(simd_sub(_cameraPosition, _cameraLookAt));
+}
+
+// Lighting control methods
+
+void PinnacleMetalRenderer::setLightDirection(simd_float3 direction) {
+    _lightDirection = simd_normalize(direction);  // Normalize to ensure it's a unit vector
+
+    // Update light buffer
+    Light* light = (Light*)[_pLightBuffer contents];
+    light->direction = _lightDirection;
+}
+
+void PinnacleMetalRenderer::setLightIntensity(float intensity) {
+    _lightIntensity = std::max(0.0f, intensity);  // Clamp to non-negative
+
+    // Update light buffer
+    Light* light = (Light*)[_pLightBuffer contents];
+    light->intensity = _lightIntensity;
+}
+
+void PinnacleMetalRenderer::setLightColor(simd_float3 color) {
+    // Clamp color components to [0, 1]
+    _lightColor = simd_make_float3(
+        std::max(0.0f, std::min(1.0f, color.x)),
+        std::max(0.0f, std::min(1.0f, color.y)),
+        std::max(0.0f, std::min(1.0f, color.z))
+    );
+
+    // Update light buffer
+    Light* light = (Light*)[_pLightBuffer contents];
+    light->color = _lightColor;
+}
+
+// Environment control methods
+
+void PinnacleMetalRenderer::setBackgroundColor(simd_float4 color) {
+    // Clamp color components to [0, 1]
+    _backgroundColor = simd_make_float4(
+        std::max(0.0f, std::min(1.0f, color.x)),
+        std::max(0.0f, std::min(1.0f, color.y)),
+        std::max(0.0f, std::min(1.0f, color.z)),
+        std::max(0.0f, std::min(1.0f, color.w))
+    );
 }
 
 // Factory function implementation

@@ -33,11 +33,12 @@ struct ContentView: View {
     @State private var showShaderEditor = false
     @State private var showSceneInspector = true
     @State private var selectedViewMode: ViewMode = .pbr
-    @State private var cameraDistance: Double = 5.0
+    @State private var showEnvironmentPanel = false
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
     private var cameraControlsBridge: CameraControlsBridge?
+    private var environmentControlsBridge: EnvironmentControlsBridge?
 
     init() {
         let view = MetalView()
@@ -48,9 +49,10 @@ struct ContentView: View {
         _shaderEditorViewModel = StateObject(wrappedValue: ShaderEditorViewModel(renderer: renderer))
         _sceneInspectorViewModel = StateObject(wrappedValue: SceneInspectorViewModel(renderer: renderer))
 
-        // Create camera controls bridge
+        // Create control bridges
         if let renderer = renderer {
             cameraControlsBridge = CameraControlsBridge(renderer: renderer)
+            environmentControlsBridge = EnvironmentControlsBridge(renderer: renderer)
         }
     }
 
@@ -85,7 +87,7 @@ struct ContentView: View {
 
                     Spacer()
 
-                    // Camera Controls
+                    // Camera & Environment Controls
                     HStack(spacing: 4) {
                         Button(action: {
                             cameraControlsBridge?.resetCamera()
@@ -102,6 +104,21 @@ struct ContentView: View {
                                 .help("Fit to Model")
                         }
                         .buttonStyle(.borderless)
+
+                        Divider()
+                            .frame(height: 16)
+
+                        Button(action: {
+                            showEnvironmentPanel.toggle()
+                        }) {
+                            Image(systemName: "light.max")
+                                .help("Lighting & Environment")
+                        }
+                        .buttonStyle(.borderless)
+                        .popover(isPresented: $showEnvironmentPanel, arrowEdge: .bottom) {
+                            EnvironmentControlsPanel(bridge: environmentControlsBridge)
+                                .frame(width: 300)
+                        }
                     }
                     .padding(.horizontal, 8)
 
@@ -165,6 +182,109 @@ struct ContentView: View {
         } else {
             // Reset to default PBR shader
             shaderEditorViewModel.resetToDefaults()
+        }
+    }
+}
+
+// MARK: - Environment Controls Panel
+
+struct EnvironmentControlsPanel: View {
+    let bridge: EnvironmentControlsBridge?
+
+    @State private var lightIntensity: Double = 1.0
+    @State private var lightColor: Color = .white
+    @State private var backgroundColor: Color = Color(red: 0.1, green: 0.1, blue: 0.1)
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Lighting & Environment")
+                .font(.headline)
+                .padding(.bottom, 4)
+
+            // Light Intensity
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("Light Intensity")
+                        .font(.subheadline)
+                    Spacer()
+                    Text(String(format: "%.2f", lightIntensity))
+                        .foregroundColor(.secondary)
+                        .font(.caption)
+                }
+
+                Slider(value: $lightIntensity, in: 0...3) { editing in
+                    if !editing {
+                        bridge?.setLightIntensity(Float(lightIntensity))
+                    }
+                }
+            }
+
+            Divider()
+
+            // Light Color
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Light Color")
+                    .font(.subheadline)
+
+                ColorPicker("", selection: $lightColor, supportsOpacity: false)
+                    .labelsHidden()
+                    .onChange(of: lightColor) { newColor in
+                        let components = NSColor(newColor).usingColorSpace(.deviceRGB)!
+                        let r = Float(components.redComponent)
+                        let g = Float(components.greenComponent)
+                        let b = Float(components.blueComponent)
+                        bridge?.setLightColor(simd_make_float3(r, g, b))
+                    }
+            }
+
+            Divider()
+
+            // Background Color
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Background Color")
+                    .font(.subheadline)
+
+                ColorPicker("", selection: $backgroundColor, supportsOpacity: false)
+                    .labelsHidden()
+                    .onChange(of: backgroundColor) { newColor in
+                        let components = NSColor(newColor).usingColorSpace(.deviceRGB)!
+                        let r = Float(components.redComponent)
+                        let g = Float(components.greenComponent)
+                        let b = Float(components.blueComponent)
+                        bridge?.setBackgroundColor(simd_make_float4(r, g, b, 1.0))
+                    }
+            }
+
+            Divider()
+
+            // Light Direction (simplified - could be expanded)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Light Direction")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                Text("Automatic (top-right)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding()
+        .onAppear {
+            // Load current values from bridge
+            if let info = bridge?.getLightingInfo() {
+                lightIntensity = Double(info.intensity)
+
+                let r = Double(info.color.x)
+                let g = Double(info.color.y)
+                let b = Double(info.color.z)
+                lightColor = Color(red: r, green: g, blue: b)
+            }
+
+            if let bgColor = bridge?.getBackgroundColor() {
+                let r = Double(bgColor.x)
+                let g = Double(bgColor.y)
+                let b = Double(bgColor.z)
+                backgroundColor = Color(red: r, green: g, blue: b)
+            }
         }
     }
 }

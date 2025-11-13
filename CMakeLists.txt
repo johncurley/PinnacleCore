@@ -43,6 +43,7 @@ set(OBJCXX_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ShaderEditorBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/SceneInspectorBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/CameraControlsBridge.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/EnvironmentControlsBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/PinnacleMetalImplementation.mm
 )
 

@@ -49,6 +49,18 @@ public:
     float getCameraDistance() const;
     float getCameraFieldOfView() const { return _cameraFOV; }
 
+    // Lighting controls
+    void setLightDirection(simd_float3 direction);
+    void setLightIntensity(float intensity);
+    void setLightColor(simd_float3 color);
+    simd_float3 getLightDirection() const { return _lightDirection; }
+    float getLightIntensity() const { return _lightIntensity; }
+    simd_float3 getLightColor() const { return _lightColor; }
+
+    // Environment controls
+    void setBackgroundColor(simd_float4 color);
+    simd_float4 getBackgroundColor() const { return _backgroundColor; }
+
 private:
     id<MTLDevice> _pDevice;
     id<MTLCommandQueue> _pCommandQueue;
@@ -77,6 +89,14 @@ private:
     float _cameraFar;
     float _cameraOrbitTheta;   // Horizontal angle
     float _cameraOrbitPhi;     // Vertical angle
+
+    // Lighting state
+    simd_float3 _lightDirection;
+    simd_float3 _lightColor;
+    float _lightIntensity;
+
+    // Environment state
+    simd_float4 _backgroundColor;
 
     void buildShaders();
     void drawModel(id<MTLRenderCommandEncoder> renderEncoder);
