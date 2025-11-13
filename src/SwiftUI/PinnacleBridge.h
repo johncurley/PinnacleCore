@@ -5,6 +5,7 @@
 #import <AppKit/AppKit.h>
 #import "ShaderEditorBridge.h"
 #import "SceneInspectorBridge.h"
+#import "CameraControlsBridge.h"
 
 #ifdef __cplusplus
 // Forward declaration of the C++ interface

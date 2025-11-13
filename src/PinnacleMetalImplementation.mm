@@ -78,6 +78,9 @@ PinnacleMetalRenderer::PinnacleMetalRenderer() {
     light->direction = simd_make_float3(0.5f, -1.0f, 0.5f);
     light->color = simd_make_float3(1.0f, 1.0f, 1.0f);
     light->intensity = 1.0f;
+
+    // Initialize camera with default values
+    resetCamera();
 }
 
 PinnacleMetalRenderer::~PinnacleMetalRenderer() {
@@ -252,40 +255,33 @@ void PinnacleMetalRenderer::draw(void* metalLayer) {
                                               (simd_float4){0, 0, 1, 0},
                                               (simd_float4){0, 0, 0, 1});
 
-        // View matrix (camera looking at origin from distance)
-        simd_float3 eye = simd_make_float3(0.0f, 0.0f, 5.0f);
-        simd_float3 center = simd_make_float3(0.0f, 0.0f, 0.0f);
-        simd_float3 up = simd_make_float3(0.0f, 1.0f, 0.0f);
-
-        simd_float3 f = simd_normalize(simd_sub(center, eye));
-        simd_float3 s = simd_normalize(simd_cross(f, up));
+        // View matrix (using camera state)
+        simd_float3 f = simd_normalize(simd_sub(_cameraLookAt, _cameraPosition));
+        simd_float3 s = simd_normalize(simd_cross(f, _cameraUp));
         simd_float3 u = simd_cross(s, f);
 
         uniforms->viewMatrix = simd_matrix4x4(
             (simd_float4){s.x, u.x, -f.x, 0},
             (simd_float4){s.y, u.y, -f.y, 0},
             (simd_float4){s.z, u.z, -f.z, 0},
-            (simd_float4){-simd_dot(s, eye), -simd_dot(u, eye), simd_dot(f, eye), 1}
+            (simd_float4){-simd_dot(s, _cameraPosition), -simd_dot(u, _cameraPosition), simd_dot(f, _cameraPosition), 1}
         );
 
-        // Projection matrix (perspective)
+        // Projection matrix (perspective, using camera state)
         float aspect = (float)pMetalLayer.drawableSize.width / (float)pMetalLayer.drawableSize.height;
-        float fovy = 45.0f * (3.14159265359f / 180.0f); // 45 degrees in radians
-        float near = 0.1f;
-        float far = 100.0f;
 
-        float ys = 1.0f / tanf(fovy * 0.5f);
+        float ys = 1.0f / tanf(_cameraFOV * 0.5f);
         float xs = ys / aspect;
-        float zs = far / (near - far);
+        float zs = _cameraFar / (_cameraNear - _cameraFar);
 
         uniforms->projectionMatrix = simd_matrix4x4(
             (simd_float4){xs, 0, 0, 0},
             (simd_float4){0, ys, 0, 0},
             (simd_float4){0, 0, zs, -1},
-            (simd_float4){0, 0, near * zs, 0}
+            (simd_float4){0, 0, _cameraNear * zs, 0}
         );
 
-        uniforms->cameraPosition = eye;
+        uniforms->cameraPosition = _cameraPosition;
 
         // Create depth texture
         id<MTLTexture> colorTexture = [pDrawable texture];
@@ -370,6 +366,121 @@ void PinnacleMetalRenderer::resetToDefaultShaders() {
 
 id PinnacleMetalRenderer::getVertexDescriptor() {
     return _pVertexDescriptor;
+}
+
+// Camera control methods
+
+void PinnacleMetalRenderer::resetCamera() {
+    _cameraPosition = simd_make_float3(0.0f, 0.0f, 5.0f);
+    _cameraLookAt = simd_make_float3(0.0f, 0.0f, 0.0f);
+    _cameraUp = simd_make_float3(0.0f, 1.0f, 0.0f);
+    _cameraFOV = 45.0f * (3.14159265359f / 180.0f);  // 45 degrees in radians
+    _cameraNear = 0.1f;
+    _cameraFar = 100.0f;
+    _cameraOrbitTheta = 0.0f;
+    _cameraOrbitPhi = 0.0f;
+}
+
+void PinnacleMetalRenderer::fitCameraToModel() {
+    if (!_pModel) {
+        resetCamera();
+        return;
+    }
+
+    const auto& meshes = _pModel->getMeshes();
+    if (meshes.empty()) {
+        resetCamera();
+        return;
+    }
+
+    // Calculate bounding box
+    float minX = INFINITY, minY = INFINITY, minZ = INFINITY;
+    float maxX = -INFINITY, maxY = -INFINITY, maxZ = -INFINITY;
+
+    for (const auto& mesh : meshes) {
+        id<MTLBuffer> vertexBuffer = (id<MTLBuffer>)mesh->getVertexBuffer();
+        if (vertexBuffer) {
+            const Pinnacle::Vertex* vertices = (const Pinnacle::Vertex*)[vertexBuffer contents];
+            size_t vertexCount = mesh->getVertexCount();
+
+            for (size_t i = 0; i < vertexCount; ++i) {
+                const auto& pos = vertices[i].position;
+                minX = std::min(minX, pos.x);
+                minY = std::min(minY, pos.y);
+                minZ = std::min(minZ, pos.z);
+                maxX = std::max(maxX, pos.x);
+                maxY = std::max(maxY, pos.y);
+                maxZ = std::max(maxZ, pos.z);
+            }
+        }
+    }
+
+    // Calculate center and size
+    simd_float3 center = simd_make_float3(
+        (minX + maxX) * 0.5f,
+        (minY + maxY) * 0.5f,
+        (minZ + maxZ) * 0.5f
+    );
+
+    float sizeX = maxX - minX;
+    float sizeY = maxY - minY;
+    float sizeZ = maxZ - minZ;
+    float maxSize = std::max(std::max(sizeX, sizeY), sizeZ);
+
+    // Position camera to fit model in view
+    // Distance = size / (2 * tan(fov/2))
+    float distance = maxSize / (2.0f * tanf(_cameraFOV * 0.5f)) * 1.5f;  // 1.5x for padding
+
+    _cameraLookAt = center;
+    _cameraPosition = simd_make_float3(center.x, center.y, center.z + distance);
+    _cameraUp = simd_make_float3(0.0f, 1.0f, 0.0f);
+
+    // Update orbit angles to match new position
+    simd_float3 offset = simd_sub(_cameraPosition, _cameraLookAt);
+    float dist = simd_length(offset);
+    _cameraOrbitPhi = asinf(offset.y / dist);
+    _cameraOrbitTheta = atan2f(offset.x, offset.z);
+}
+
+void PinnacleMetalRenderer::setCameraDistance(float distance) {
+    simd_float3 direction = simd_normalize(simd_sub(_cameraPosition, _cameraLookAt));
+    _cameraPosition = simd_add(_cameraLookAt, simd_mul(direction, distance));
+
+    // Update orbit angles
+    simd_float3 offset = simd_sub(_cameraPosition, _cameraLookAt);
+    float dist = simd_length(offset);
+    _cameraOrbitPhi = asinf(offset.y / dist);
+    _cameraOrbitTheta = atan2f(offset.x, offset.z);
+}
+
+void PinnacleMetalRenderer::orbitCamera(float deltaX, float deltaY) {
+    // Update orbit angles
+    _cameraOrbitTheta += deltaX;
+    _cameraOrbitPhi += deltaY;
+
+    // Clamp phi to avoid gimbal lock
+    const float maxPhi = 1.5f;  // ~86 degrees
+    _cameraOrbitPhi = std::max(-maxPhi, std::min(maxPhi, _cameraOrbitPhi));
+
+    updateCameraFromOrbit();
+}
+
+void PinnacleMetalRenderer::updateCameraFromOrbit() {
+    // Calculate distance from look-at point
+    simd_float3 offset = simd_sub(_cameraPosition, _cameraLookAt);
+    float distance = simd_length(offset);
+
+    // Calculate new position using spherical coordinates
+    float cosPhi = cosf(_cameraOrbitPhi);
+    _cameraPosition = simd_make_float3(
+        _cameraLookAt.x + distance * cosPhi * sinf(_cameraOrbitTheta),
+        _cameraLookAt.y + distance * sinf(_cameraOrbitPhi),
+        _cameraLookAt.z + distance * cosPhi * cosf(_cameraOrbitTheta)
+    );
+}
+
+float PinnacleMetalRenderer::getCameraDistance() const {
+    return simd_length(simd_sub(_cameraPosition, _cameraLookAt));
 }
 
 // Factory function implementation

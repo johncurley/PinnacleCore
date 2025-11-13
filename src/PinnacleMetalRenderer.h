@@ -37,6 +37,18 @@ public:
     // Scene inspection
     std::shared_ptr<Pinnacle::Model> getModel() const { return _pModel; }
 
+    // Camera controls
+    void resetCamera();
+    void fitCameraToModel();
+    void setCameraDistance(float distance);
+    void orbitCamera(float deltaX, float deltaY);
+
+    // Camera info getters
+    simd_float3 getCameraPosition() const { return _cameraPosition; }
+    simd_float3 getCameraLookAt() const { return _cameraLookAt; }
+    float getCameraDistance() const;
+    float getCameraFieldOfView() const { return _cameraFOV; }
+
 private:
     id<MTLDevice> _pDevice;
     id<MTLCommandQueue> _pCommandQueue;
@@ -56,8 +68,19 @@ private:
     id<MTLVertexDescriptor> _pVertexDescriptor;         // Cached vertex descriptor
     bool _usingCustomShader;                            // Flag for custom shader state
 
+    // Camera state
+    simd_float3 _cameraPosition;
+    simd_float3 _cameraLookAt;
+    simd_float3 _cameraUp;
+    float _cameraFOV;          // Field of view in radians
+    float _cameraNear;
+    float _cameraFar;
+    float _cameraOrbitTheta;   // Horizontal angle
+    float _cameraOrbitPhi;     // Vertical angle
+
     void buildShaders();
     void drawModel(id<MTLRenderCommandEncoder> renderEncoder);
+    void updateCameraFromOrbit();
 };
 
 #endif /* PinnacleMetalRenderer_h */

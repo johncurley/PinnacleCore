@@ -33,8 +33,11 @@ struct ContentView: View {
     @State private var showShaderEditor = false
     @State private var showSceneInspector = true
     @State private var selectedViewMode: ViewMode = .pbr
+    @State private var cameraDistance: Double = 5.0
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
+
+    private var cameraControlsBridge: CameraControlsBridge?
 
     init() {
         let view = MetalView()
@@ -44,6 +47,11 @@ struct ContentView: View {
         let renderer = view.bridge.getRenderer()
         _shaderEditorViewModel = StateObject(wrappedValue: ShaderEditorViewModel(renderer: renderer))
         _sceneInspectorViewModel = StateObject(wrappedValue: SceneInspectorViewModel(renderer: renderer))
+
+        // Create camera controls bridge
+        if let renderer = renderer {
+            cameraControlsBridge = CameraControlsBridge(renderer: renderer)
+        }
     }
 
     var body: some View {
@@ -74,6 +82,28 @@ struct ContentView: View {
                             applyViewMode(newMode)
                         }
                     }
+
+                    Spacer()
+
+                    // Camera Controls
+                    HStack(spacing: 4) {
+                        Button(action: {
+                            cameraControlsBridge?.resetCamera()
+                        }) {
+                            Image(systemName: "camera")
+                                .help("Reset Camera")
+                        }
+                        .buttonStyle(.borderless)
+
+                        Button(action: {
+                            cameraControlsBridge?.fitToModel()
+                        }) {
+                            Image(systemName: "viewfinder")
+                                .help("Fit to Model")
+                        }
+                        .buttonStyle(.borderless)
+                    }
+                    .padding(.horizontal, 8)
 
                     Spacer()
 
