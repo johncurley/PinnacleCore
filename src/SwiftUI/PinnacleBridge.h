@@ -18,6 +18,9 @@ class IPinnacleMetalRenderer;
 // Add a method to get the underlying NSView/MTKView for SwiftUI
 - (nonnull NSView *)getMetalContentView;
 
+// Get renderer pointer for shader editor
+- (nullable void *)getRenderer;
+
 @end
 
 #endif /* PinnacleBridge_h */

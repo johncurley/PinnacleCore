@@ -19,6 +19,8 @@ set(SWIFT_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/MetalExampleApp.swift
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ContentView.swift
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/MetalView.swift
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ShaderEditorView.swift
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ShaderEditorViewModel.swift
 )
 
 set(OBJCXX_FILES
@@ -37,6 +39,7 @@ set(OBJCXX_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ShaderEditor/ShaderLibrary.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ShaderEditor/ShaderEditorExample.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/PinnacleBridge.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ShaderEditorBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/PinnacleMetalImplementation.mm
 )
 

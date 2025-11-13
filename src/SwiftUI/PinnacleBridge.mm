@@ -41,6 +41,11 @@
     return _mtkView;
 }
 
+- (nullable void *)getRenderer
+{
+    return _renderer;
+}
+
 #pragma mark - MTKViewDelegate
 
 - (void)drawInMTKView:(nonnull MTKView *)view
