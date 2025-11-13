@@ -37,6 +37,7 @@ set(OBJCXX_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Material.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Mesh.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Model.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/AssimpLoader.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Node.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Scene/Texture.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ShaderEditor/ShaderSource.mm
@@ -84,6 +85,7 @@ add_executable(PinnacleCore MACOSX_BUNDLE
 # Framework linking
 # -----------------------------------------------------------------------------
 target_link_libraries(PinnacleCore
+    assimp
     "-framework Cocoa"
     "-framework Metal"
     "-framework MetalKit"
@@ -135,10 +137,33 @@ if(METAL_CPP_PATH)
         ${CMAKE_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/metal-cpp
         ${CMAKE_SOURCE_DIR}/libs
+        ${assimp_SOURCE_DIR}/include
+        ${assimp_BINARY_DIR}/include
     )
 else()
     message(WARNING "⚠️  Failed to locate or fetch metal-cpp.")
 endif()
+
+# -----------------------------------------------------------------------------
+# Fetch or locate Assimp (for FBX/OBJ support)
+# -----------------------------------------------------------------------------
+message(STATUS "Fetching Assimp for FBX/OBJ support...")
+FetchContent_Declare(
+    assimp
+    GIT_REPOSITORY https://github.com/assimp/assimp.git
+    GIT_TAG v5.3.1
+)
+
+# Assimp build options
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE BOOL "" FORCE)
+set(ASSIMP_BUILD_SAMPLES OFF CACHE BOOL "" FORCE)
+set(ASSIMP_INSTALL OFF CACHE BOOL "" FORCE)
+set(ASSIMP_INJECT_DEBUG_POSTFIX OFF CACHE BOOL "" FORCE)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+
+FetchContent_MakeAvailable(assimp)
+message(STATUS "Assimp configured successfully")
 
 # -----------------------------------------------------------------------------
 # Swift bridging header

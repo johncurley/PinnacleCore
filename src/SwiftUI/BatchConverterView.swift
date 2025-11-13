@@ -552,7 +552,9 @@ class BatchConverterViewModel: ObservableObject {
         panel.allowedContentTypes = [
             .init(filenameExtension: "gltf")!,
             .init(filenameExtension: "glb")!,
-            .init(filenameExtension: "usdz")!
+            .init(filenameExtension: "usdz")!,
+            .init(filenameExtension: "fbx")!,
+            .init(filenameExtension: "obj")!
         ]
 
         if panel.runModal() == .OK {

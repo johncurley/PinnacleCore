@@ -329,7 +329,7 @@ struct ContentView: View {
 
     // MARK: - Model Loading
 
-    /// Open file picker to select a glTF/GLB/USDZ model
+    /// Open file picker to select a 3D model file
     private func openFilePicker() {
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = false
@@ -338,9 +338,11 @@ struct ContentView: View {
         panel.allowedContentTypes = [
             .init(filenameExtension: "gltf")!,
             .init(filenameExtension: "glb")!,
-            .init(filenameExtension: "usdz")!
+            .init(filenameExtension: "usdz")!,
+            .init(filenameExtension: "fbx")!,
+            .init(filenameExtension: "obj")!
         ]
-        panel.message = "Select a 3D model file (glTF, GLB, or USDZ)"
+        panel.message = "Select a 3D model file (glTF, GLB, USDZ, FBX, or OBJ)"
 
         if panel.runModal() == .OK, let url = panel.url {
             let ext = url.pathExtension.lowercased()
@@ -399,7 +401,7 @@ struct ContentView: View {
 
             // Check if it's a supported file type
             let ext = url.pathExtension.lowercased()
-            guard ext == "gltf" || ext == "glb" || ext == "usdz" else { return }
+            guard ext == "gltf" || ext == "glb" || ext == "usdz" || ext == "fbx" || ext == "obj" else { return }
 
             DispatchQueue.main.async {
                 if ext == "usdz" {

@@ -4,6 +4,7 @@
 #include "Mesh.hpp"
 #include "Material.hpp"
 #include "Texture.hpp"
+#include "AssimpLoader.hpp"
 
 #define TINYGLTF_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -25,22 +26,37 @@ namespace Pinnacle
 
     void Model::loadModel(id device, const std::string& path)
     {
+        // Detect file format by extension
+        std::string ext;
+        size_t dotPos = path.find_last_of('.');
+        if (dotPos != std::string::npos) {
+            ext = path.substr(dotPos + 1);
+            // Convert to lowercase
+            for (char& c : ext) {
+                c = std::tolower(c);
+            }
+        }
+
+        // Use Assimp for FBX and OBJ files
+        if (ext == "fbx" || ext == "obj") {
+            AssimpLoader assimpLoader;
+            if (assimpLoader.loadFromFile(device, path, m_meshes, m_materials, m_textures)) {
+                std::cout << "Successfully loaded " << ext << " file: " << path << std::endl;
+                return;
+            } else {
+                std::cerr << "Failed to load " << ext << " file: " << path << std::endl;
+                std::cerr << "Error: " << assimpLoader.getLastError() << std::endl;
+                return;
+            }
+        }
+
+        // Use tinygltf for glTF/GLB files
         tinygltf::TinyGLTF loader;
         tinygltf::Model gltfModel;
         std::string err;
         std::string warn;
 
-        // Detect file format by extension
-        bool isBinary = false;
-        size_t dotPos = path.find_last_of('.');
-        if (dotPos != std::string::npos) {
-            std::string ext = path.substr(dotPos + 1);
-            // Convert to lowercase
-            for (char& c : ext) {
-                c = std::tolower(c);
-            }
-            isBinary = (ext == "glb");
-        }
+        bool isBinary = (ext == "glb");
 
         // Load based on format
         bool res = false;
