@@ -30,7 +30,25 @@ namespace Pinnacle
         std::string err;
         std::string warn;
 
-        bool res = loader.LoadASCIIFromFile(&gltfModel, &err, &warn, path);
+        // Detect file format by extension
+        bool isBinary = false;
+        size_t dotPos = path.find_last_of('.');
+        if (dotPos != std::string::npos) {
+            std::string ext = path.substr(dotPos + 1);
+            // Convert to lowercase
+            for (char& c : ext) {
+                c = std::tolower(c);
+            }
+            isBinary = (ext == "glb");
+        }
+
+        // Load based on format
+        bool res = false;
+        if (isBinary) {
+            res = loader.LoadBinaryFromFile(&gltfModel, &err, &warn, path);
+        } else {
+            res = loader.LoadASCIIFromFile(&gltfModel, &err, &warn, path);
+        }
 
         if (!warn.empty()) {
             std::cout << "glTF Warning: " << warn << std::endl;
@@ -41,11 +59,11 @@ namespace Pinnacle
         }
 
         if (!res) {
-            std::cerr << "Failed to load glTF: " << path << std::endl;
+            std::cerr << "Failed to load " << (isBinary ? "GLB" : "glTF") << ": " << path << std::endl;
             return;
         }
 
-        std::cout << "Successfully loaded glTF: " << path << std::endl;
+        std::cout << "Successfully loaded " << (isBinary ? "GLB" : "glTF") << ": " << path << std::endl;
 
         // Get the directory path for loading textures
         std::string directory = path.substr(0, path.find_last_of('/') + 1);

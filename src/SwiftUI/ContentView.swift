@@ -44,6 +44,7 @@ struct ContentView: View {
     @State private var showMaterialCreator: Bool = false
     @State private var showBatchConverter: Bool = false
     @State private var showTextureManager: Bool = false
+    @State private var showModelValidator: Bool = false
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
@@ -124,6 +125,12 @@ struct ContentView: View {
                             showTextureManager = true
                         }) {
                             Label("Texture Manager...", systemImage: "photo.on.rectangle")
+                        }
+
+                        Button(action: {
+                            showModelValidator = true
+                        }) {
+                            Label("Model Validator...", systemImage: "checkmark.shield")
                         }
 
                         if !recentFiles.isEmpty {
@@ -288,6 +295,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showTextureManager) {
             TextureManagerView(renderer: metalView.bridge.getRenderer())
+        }
+        .sheet(isPresented: $showModelValidator) {
+            ModelValidatorView(renderer: metalView.bridge.getRenderer())
         }
     }
 

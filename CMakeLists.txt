@@ -25,6 +25,7 @@ set(SWIFT_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/MaterialCreatorView.swift
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/BatchConverterView.swift
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/TextureManagerView.swift
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ModelValidatorView.swift
 )
 
 set(OBJCXX_FILES
@@ -51,6 +52,7 @@ set(OBJCXX_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/MaterialFixerBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/BatchConverterBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/TextureManagerBridge.mm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/SwiftUI/ModelValidatorBridge.mm
     ${CMAKE_CURRENT_SOURCE_DIR}/src/PinnacleMetalImplementation.mm
 )
 
