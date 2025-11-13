@@ -43,6 +43,7 @@ struct ContentView: View {
     @State private var exportErrorMessage: String = ""
     @State private var showMaterialCreator: Bool = false
     @State private var showBatchConverter: Bool = false
+    @State private var showTextureManager: Bool = false
     @StateObject private var shaderEditorViewModel: ShaderEditorViewModel
     @StateObject private var sceneInspectorViewModel: SceneInspectorViewModel
 
@@ -117,6 +118,12 @@ struct ContentView: View {
                             showBatchConverter = true
                         }) {
                             Label("Batch Converter...", systemImage: "square.stack.3d.up")
+                        }
+
+                        Button(action: {
+                            showTextureManager = true
+                        }) {
+                            Label("Texture Manager...", systemImage: "photo.on.rectangle")
                         }
 
                         if !recentFiles.isEmpty {
@@ -278,6 +285,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showBatchConverter) {
             BatchConverterView(renderer: metalView.bridge.getRenderer())
+        }
+        .sheet(isPresented: $showTextureManager) {
+            TextureManagerView(renderer: metalView.bridge.getRenderer())
         }
     }
 
