@@ -199,7 +199,7 @@ struct MaterialCreatorView: View {
         }
 
         let result = MaterialFixerBridge.createMaterial(
-            fromTextures: textureDict as NSDictionary,
+            fromTextures: textureDict,
             materialName: materialName
         )
 
