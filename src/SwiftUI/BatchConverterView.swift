@@ -4,7 +4,7 @@ struct BatchConverterView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: BatchConverterViewModel
 
-    init(renderer: PinnacleMetalRenderer) {
+    init(renderer: UnsafeMutableRawPointer?) {
         _viewModel = StateObject(wrappedValue: BatchConverterViewModel(renderer: renderer))
     }
 
@@ -501,7 +501,7 @@ struct FileResultRow: View {
 // MARK: - View Model
 
 class BatchConverterViewModel: ObservableObject {
-    private let renderer: PinnacleMetalRenderer
+    private let renderer: UnsafeMutableRawPointer?
     private var bridge: BatchConverterBridge
 
     // Input files
@@ -539,7 +539,7 @@ class BatchConverterViewModel: ObservableObject {
     // Results
     @Published var batchResult: BatchConversionResult? = nil
 
-    init(renderer: PinnacleMetalRenderer) {
+    init(renderer: UnsafeMutableRawPointer?) {
         self.renderer = renderer
         self.bridge = BatchConverterBridge(renderer: renderer)
     }

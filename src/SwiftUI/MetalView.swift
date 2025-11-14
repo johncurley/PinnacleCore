@@ -1,5 +1,4 @@
 import SwiftUI
-import PinnacleCore // This is the module name from CMakeLists.txt
 
 struct MetalView: NSViewRepresentable {
     let bridge = PinnacleMetalView(frame: .zero) // Instantiate the bridge object

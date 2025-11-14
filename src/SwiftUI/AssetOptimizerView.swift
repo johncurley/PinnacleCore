@@ -4,7 +4,7 @@ struct AssetOptimizerView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: AssetOptimizerViewModel
 
-    init(renderer: PinnacleMetalRenderer) {
+    init(renderer: UnsafeMutableRawPointer?) {
         _viewModel = StateObject(wrappedValue: AssetOptimizerViewModel(renderer: renderer))
     }
 
@@ -597,7 +597,7 @@ struct ResultsView: View {
 // MARK: - View Model
 
 class AssetOptimizerViewModel: ObservableObject {
-    private let renderer: PinnacleMetalRenderer
+    private let renderer: UnsafeMutableRawPointer?
     private var bridge: AssetOptimizerBridge
 
     @Published var selectedProfile: OptimizationProfile = .desktop
@@ -611,7 +611,7 @@ class AssetOptimizerViewModel: ObservableObject {
     @Published var currentOperation: String = ""
     @Published var progress: Double = 0.0
 
-    init(renderer: PinnacleMetalRenderer) {
+    init(renderer: UnsafeMutableRawPointer?) {
         self.renderer = renderer
         self.bridge = AssetOptimizerBridge(renderer: renderer)
         self.settings = OptimizationSettings.desktopProfile()

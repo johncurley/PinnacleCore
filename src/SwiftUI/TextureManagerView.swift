@@ -4,7 +4,7 @@ struct TextureManagerView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: TextureManagerViewModel
 
-    init(renderer: PinnacleMetalRenderer) {
+    init(renderer: UnsafeMutableRawPointer?) {
         _viewModel = StateObject(wrappedValue: TextureManagerViewModel(renderer: renderer))
     }
 
@@ -252,14 +252,14 @@ struct TextureOverviewSection: View {
                         .font(.headline)
 
                     VStack(spacing: 12) {
-                        StatRow(label: "Total Textures", value: "\(result.totalTextures)")
-                        StatRow(label: "Missing Textures", value: "\(result.missingTextures)",
+                        TextureManagerStatRow(label: "Total Textures", value: "\(result.totalTextures)")
+                        TextureManagerStatRow(label: "Missing Textures", value: "\(result.missingTextures)",
                                valueColor: result.missingTextures > 0 ? .red : nil)
-                        StatRow(label: "Unused Textures", value: "\(result.unusedTextures)",
+                        TextureManagerStatRow(label: "Unused Textures", value: "\(result.unusedTextures)",
                                valueColor: result.unusedTextures > 0 ? .orange : nil)
-                        StatRow(label: "Duplicate Groups", value: "\(result.duplicateGroups)",
+                        TextureManagerStatRow(label: "Duplicate Groups", value: "\(result.duplicateGroups)",
                                valueColor: result.duplicateGroups > 0 ? .orange : nil)
-                        StatRow(label: "Total Memory", value: formatBytes(result.totalMemoryUsage))
+                        TextureManagerStatRow(label: "Total Memory", value: formatBytes(result.totalMemoryUsage))
                     }
                     .padding()
                     .background(Color(NSColor.controlBackgroundColor))
@@ -335,7 +335,7 @@ struct TextureOverviewSection: View {
     }
 }
 
-struct StatRow: View {
+struct TextureManagerStatRow: View {
     let label: String
     let value: String
     var valueColor: Color? = nil
@@ -596,7 +596,7 @@ enum TextureFilterMode {
 // MARK: - View Model
 
 class TextureManagerViewModel: ObservableObject {
-    private let renderer: PinnacleMetalRenderer
+    private let renderer: UnsafeMutableRawPointer?
     private var bridge: TextureManagerBridge
 
     @Published var analysisResult: TextureAnalysisResult? = nil
@@ -607,7 +607,7 @@ class TextureManagerViewModel: ObservableObject {
     @Published var selectedTextureIndex: Int? = nil
     @Published var showFixPathsDialog: Bool = false
 
-    init(renderer: PinnacleMetalRenderer) {
+    init(renderer: UnsafeMutableRawPointer?) {
         self.renderer = renderer
         self.bridge = TextureManagerBridge(renderer: renderer)
     }

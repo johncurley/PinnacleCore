@@ -255,17 +255,17 @@ struct StatisticsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     StatisticsSection(title: "Geometry", icon: "cube") {
-                        StatRow(label: "Meshes", value: "\(stats.meshCount)")
-                        StatRow(label: "Triangles", value: formatNumber(stats.triangleCount))
-                        StatRow(label: "Vertices", value: formatNumber(stats.vertexCount))
+                        SceneInspectorStatRow(label: "Meshes", value: "\(stats.meshCount)")
+                        SceneInspectorStatRow(label: "Triangles", value: formatNumber(stats.triangleCount))
+                        SceneInspectorStatRow(label: "Vertices", value: formatNumber(stats.vertexCount))
                     }
 
                     Divider()
 
                     StatisticsSection(title: "Materials", icon: "paintpalette") {
-                        StatRow(label: "Materials", value: "\(stats.materialCount)")
-                        StatRow(label: "Textures", value: "\(stats.textureCount)")
-                        StatRow(label: "Texture Memory", value: String(format: "%.2f MB", stats.textureMemoryMB))
+                        SceneInspectorStatRow(label: "Materials", value: "\(stats.materialCount)")
+                        SceneInspectorStatRow(label: "Textures", value: "\(stats.textureCount)")
+                        SceneInspectorStatRow(label: "Texture Memory", value: String(format: "%.2f MB", stats.textureMemoryMB))
                     }
 
                     Divider()
@@ -283,9 +283,9 @@ struct StatisticsView: View {
                             let sizeY = maxY - minY
                             let sizeZ = maxZ - minZ
 
-                            StatRow(label: "Size X", value: String(format: "%.3f", sizeX))
-                            StatRow(label: "Size Y", value: String(format: "%.3f", sizeY))
-                            StatRow(label: "Size Z", value: String(format: "%.3f", sizeZ))
+                            SceneInspectorStatRow(label: "Size X", value: String(format: "%.3f", sizeX))
+                            SceneInspectorStatRow(label: "Size Y", value: String(format: "%.3f", sizeY))
+                            SceneInspectorStatRow(label: "Size Z", value: String(format: "%.3f", sizeZ))
                         }
                     }
                 }
@@ -336,7 +336,7 @@ struct StatisticsSection<Content: View>: View {
     }
 }
 
-struct StatRow: View {
+struct SceneInspectorStatRow: View {
     let label: String
     let value: String
 

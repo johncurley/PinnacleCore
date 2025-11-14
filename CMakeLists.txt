@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.26)
 project(PinnacleCore LANGUAGES CXX OBJCXX Swift)
-set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0")
+set(CMAKE_OSX_DEPLOYMENT_TARGET "12.0")
 
 # -----------------------------------------------------------------------------
 # Build and language setup

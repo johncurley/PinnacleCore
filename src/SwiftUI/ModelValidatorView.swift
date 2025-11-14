@@ -4,7 +4,7 @@ struct ModelValidatorView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: ModelValidatorViewModel
 
-    init(renderer: PinnacleMetalRenderer) {
+    init(renderer: UnsafeMutableRawPointer?) {
         _viewModel = StateObject(wrappedValue: ModelValidatorViewModel(renderer: renderer))
     }
 
@@ -596,13 +596,13 @@ struct PropertyIndicator: View {
 // MARK: - View Model
 
 class ModelValidatorViewModel: ObservableObject {
-    private let renderer: PinnacleMetalRenderer
+    private let renderer: UnsafeMutableRawPointer?
     private var bridge: ModelValidatorBridge
 
     @Published var validationResult: ModelValidationResult? = nil
     @Published var isValidating: Bool = false
 
-    init(renderer: PinnacleMetalRenderer) {
+    init(renderer: UnsafeMutableRawPointer?) {
         self.renderer = renderer
         self.bridge = ModelValidatorBridge(renderer: renderer)
     }
