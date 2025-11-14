@@ -617,15 +617,15 @@ class TextureManagerViewModel: ObservableObject {
 
         switch filterMode {
         case .all:
-            return result.textures as! [TextureInfo]
+            return result.textures!
         case .issuesOnly:
-            return (result.textures as! [TextureInfo]).filter { texture in
+            return result.textures!.filter { texture in
                 textureIssues[Int(texture.index)]?.isEmpty == false
             }
         case .missing:
-            return (result.textures as! [TextureInfo]).filter { !$0.exists }
+            return result.textures!.filter { !$0.exists }
         case .unused:
-            return (result.textures as! [TextureInfo]).filter { $0.referenceCount == 0 }
+            return result.textures!.filter { $0.referenceCount == 0 }
         }
     }
 
@@ -633,14 +633,14 @@ class TextureManagerViewModel: ObservableObject {
         guard let index = selectedTextureIndex,
               let result = analysisResult else { return nil }
 
-        return (result.textures as! [TextureInfo]).first { $0.index == index }
+        return result.textures!.first { $0.index == index }
     }
 
     var textureIssues: [Int: [TextureIssue]] {
         guard let result = analysisResult else { return [:] }
 
         var dict: [Int: [TextureIssue]] = [:]
-        for issue in result.issues as! [TextureIssue] {
+        for issue in result.issues! {
             let index = Int(issue.textureIndex)
             if dict[index] == nil {
                 dict[index] = []
@@ -671,34 +671,34 @@ class TextureManagerViewModel: ObservableObject {
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
-        panel.message = "Select folder to search for \(texture.name)"
+        panel.message = "Select folder to search for \(texture.name ?? "texture")"
 
         if panel.runModal() == .OK, let folderURL = panel.url {
             let matches = bridge.search(forMissingTexture: texture.name,
                                        inDirectory: folderURL.path,
-                                       recursive: true) as! [String]
+                                       recursive: true)!
 
             // TODO: Show results and allow user to select correct path
-            print("Found \(matches.count) matches for \(texture.name)")
+            print("Found \(matches.count) matches for \(texture.name ?? "texture")")
         }
     }
 
     func removeTexture(_ texture: TextureInfo) {
         // TODO: Implement texture removal
-        print("Remove texture: \(texture.name)")
+        print("Remove texture: \(texture.name ?? "texture")")
     }
 
     func removeUnusedTextures() {
         let result = bridge.removeUnusedTextures()
         // TODO: Show result dialog
-        print("Removed unused textures: \(result.texturesProcessed)")
+        print("Removed unused textures: \(result?.texturesProcessed ?? 0)")
         analyzeTextures() // Refresh
     }
 
     func removeDuplicates() {
         let result = bridge.removeDuplicateTextures()
         // TODO: Show result dialog
-        print("Removed duplicates: \(result.duplicatesRemoved)")
+        print("Removed duplicates: \(result?.duplicatesRemoved ?? 0)")
         analyzeTextures() // Refresh
     }
 
