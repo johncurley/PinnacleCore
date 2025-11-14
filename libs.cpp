@@ -1,4 +1,3 @@
-#define TINYGLTF_IMPLEMENTATION
+// STB Image implementation for texture loading
 #define STB_IMAGE_IMPLEMENTATION
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "tiny_gltf.h"
+#include "stb_image.h"
