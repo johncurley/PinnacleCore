@@ -5,7 +5,11 @@
 #import <simd/simd.h>
 
 // Forward declarations
+#ifdef __cplusplus
 class PinnacleMetalRenderer;
+#else
+typedef void PinnacleMetalRenderer;
+#endif
 
 // MARK: - Validation Categories
 

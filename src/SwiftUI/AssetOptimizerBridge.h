@@ -7,7 +7,11 @@
 #import "TextureManagerBridge.h"
 
 // Forward declarations
+#ifdef __cplusplus
 class PinnacleMetalRenderer;
+#else
+typedef void PinnacleMetalRenderer;
+#endif
 
 // MARK: - Optimization Profiles
 
